@@ -1,0 +1,842 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="胸腔外科 AI、AR 與智慧導航技術的完整回顧，依證據等級分層檢視臨床需求、技術現況、發展趨勢與台灣導入建議。">
+<style>
+html{color-scheme:light dark}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+@media print{
+  body{background:#fff !important;color:#000 !important}
+  .toc{display:none !important}
+  .shell{display:block !important}
+  section{break-inside:auto}
+  h2.sec{break-after:avoid}
+  figure,table{break-inside:avoid}
+  a{color:#000 !important;text-decoration:underline}
+}
+</style>
+<title>AI、AR 與胸腔外科導航</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@400;600;700&display=swap">
+
+<style>
+:root{
+  --paper:#EEF2F3;
+  --surface:#FFFFFF;
+  --surface-2:#F6F9FA;
+  --ink:#14212A;
+  --ink-2:#4C606B;
+  --ink-3:#788992;
+  --rule:#D2DDE1;
+  --rule-soft:#E3EBED;
+  --accent:#0D6A75;
+  --accent-soft:#DBEDEF;
+  --ev-a:#1B6A57;
+  --ev-b:#2C6690;
+  --ev-c:#93641A;
+  --ev-d:#96473C;
+  --ev-a-bg:#DDEDE7;
+  --ev-b-bg:#DDE9F2;
+  --ev-c-bg:#F1E8D5;
+  --ev-d-bg:#F3E1DE;
+  --track-off:#DFE7EA;
+  --shadow:0 1px 2px rgba(20,33,42,.05),0 10px 28px -20px rgba(20,33,42,.35);
+  --serif:"Noto Serif TC",Georgia,"Times New Roman",serif;
+  --sans:"IBM Plex Sans","Noto Sans TC","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E161B;
+    --surface:#151F26;
+    --surface-2:#1A252C;
+    --ink:#E2EAED;
+    --ink-2:#9EAFB8;
+    --ink-3:#76878F;
+    --rule:#27363F;
+    --rule-soft:#1F2C34;
+    --accent:#4BAAB4;
+    --accent-soft:#123239;
+    --ev-a:#63B8A0;
+    --ev-b:#7CB0DC;
+    --ev-c:#CFA855;
+    --ev-d:#D08678;
+    --ev-a-bg:#12302A;
+    --ev-b-bg:#152C3C;
+    --ev-c-bg:#302710;
+    --ev-d-bg:#331B17;
+    --track-off:#243039;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -20px rgba(0,0,0,.85);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E161B;
+  --surface:#151F26;
+  --surface-2:#1A252C;
+  --ink:#E2EAED;
+  --ink-2:#9EAFB8;
+  --ink-3:#76878F;
+  --rule:#27363F;
+  --rule-soft:#1F2C34;
+  --accent:#4BAAB4;
+  --accent-soft:#123239;
+  --ev-a:#63B8A0;
+  --ev-b:#7CB0DC;
+  --ev-c:#CFA855;
+  --ev-d:#D08678;
+  --ev-a-bg:#12302A;
+  --ev-b-bg:#152C3C;
+  --ev-c-bg:#302710;
+  --ev-d-bg:#331B17;
+  --track-off:#243039;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -20px rgba(0,0,0,.85);
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--serif);
+  font-size:17px;
+  line-height:1.85;
+  -webkit-font-smoothing:antialiased;
+}
+.page{max-width:1180px;margin:0 auto;padding:0 24px 96px}
+
+/* ---------- masthead ---------- */
+.masthead{
+  border-bottom:1px solid var(--rule);
+  padding:56px 0 30px;
+  margin-bottom:44px;
+}
+.kicker{
+  font-family:var(--sans);
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin:0 0 20px;
+}
+h1{
+  font-family:var(--serif);
+  font-weight:700;
+  font-size:clamp(30px,4.6vw,50px);
+  line-height:1.28;
+  letter-spacing:-.01em;
+  margin:0 0 20px;
+  text-wrap:balance;
+  max-width:20ch;
+}
+.standfirst{
+  font-size:clamp(17px,1.9vw,20px);
+  line-height:1.8;
+  color:var(--ink-2);
+  max-width:60ch;
+  margin:0 0 28px;
+}
+.byline{
+  font-family:var(--sans);
+  font-size:13px;
+  color:var(--ink-3);
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 20px;
+  align-items:baseline;
+}
+.byline b{color:var(--ink-2);font-weight:500}
+
+/* ---------- layout ---------- */
+.shell{display:block}
+@media (min-width:1040px){
+  .shell{display:grid;grid-template-columns:210px minmax(0,1fr);gap:56px;align-items:start}
+  .toc{position:sticky;top:28px}
+}
+.toc{font-family:var(--sans);font-size:13.5px;line-height:1.6}
+.toc h2{
+  font-family:var(--sans);
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  font-weight:600;
+  margin:0 0 14px;
+  padding-bottom:10px;
+  border-bottom:1px solid var(--rule);
+}
+.toc ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px}
+.toc a{color:var(--ink-2);text-decoration:none;display:block;border-left:2px solid transparent;padding-left:11px;transition:color .15s,border-color .15s}
+.toc a:hover,.toc a:focus-visible{color:var(--accent);border-left-color:var(--accent)}
+.toc .num{color:var(--ink-3);font-variant-numeric:tabular-nums;margin-right:7px;font-size:12px}
+@media (max-width:1039px){
+  .toc{background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:20px 22px;margin-bottom:44px}
+  .toc ol{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:9px 22px}
+}
+
+/* ---------- prose ---------- */
+article{min-width:0}
+section{margin-bottom:60px;scroll-margin-top:24px}
+h2.sec{
+  font-family:var(--serif);
+  font-size:clamp(23px,2.7vw,30px);
+  font-weight:700;
+  line-height:1.4;
+  margin:0 0 8px;
+  text-wrap:balance;
+  letter-spacing:-.005em;
+}
+.sec-num{
+  font-family:var(--sans);
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.14em;
+  color:var(--accent);
+  display:block;
+  margin-bottom:12px;
+}
+.sec-lede{color:var(--ink-2);max-width:64ch;margin:0 0 30px;font-size:16.5px}
+h3{
+  font-family:var(--serif);
+  font-size:19.5px;
+  font-weight:700;
+  line-height:1.5;
+  margin:38px 0 12px;
+  text-wrap:balance;
+}
+h4{
+  font-family:var(--sans);
+  font-size:14px;
+  font-weight:600;
+  letter-spacing:.02em;
+  color:var(--ink-2);
+  margin:28px 0 10px;
+}
+p{margin:0 0 18px;max-width:66ch}
+a{color:var(--accent);text-underline-offset:3px;text-decoration-thickness:1px;text-decoration-color:color-mix(in srgb,var(--accent) 42%,transparent)}
+a:hover{text-decoration-color:var(--accent)}
+strong{font-weight:700;color:var(--ink)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+ul.body-list{margin:0 0 20px;padding:0;list-style:none;max-width:66ch;display:flex;flex-direction:column;gap:12px}
+ul.body-list li{padding-left:20px;position:relative}
+ul.body-list li::before{content:"";position:absolute;left:2px;top:.72em;width:6px;height:1px;background:var(--ink-3)}
+
+/* ---------- evidence chips ---------- */
+.ev{
+  font-family:var(--sans);
+  font-size:11.5px;
+  font-weight:600;
+  letter-spacing:.02em;
+  padding:2px 8px;
+  border-radius:3px;
+  white-space:nowrap;
+  display:inline-block;
+  vertical-align:.09em;
+  line-height:1.6;
+}
+.ev-a{color:var(--ev-a);background:var(--ev-a-bg)}
+.ev-b{color:var(--ev-b);background:var(--ev-b-bg)}
+.ev-c{color:var(--ev-c);background:var(--ev-c-bg)}
+.ev-d{color:var(--ev-d);background:var(--ev-d-bg)}
+
+.legend{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:22px 24px;
+  margin:0 0 44px;
+}
+.legend h2{font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:600;margin:0 0 16px}
+.legend-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px 26px}
+.legend-item{font-family:var(--sans);font-size:13.5px;line-height:1.6;color:var(--ink-2);display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+
+/* ---------- figures ---------- */
+figure{margin:34px 0;padding:0}
+figure svg{display:block;width:100%;height:auto;color:var(--ink-2)}
+.fig-frame{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:24px 22px 18px;
+  overflow-x:auto;
+}
+figcaption{
+  font-family:var(--sans);
+  font-size:13px;
+  line-height:1.7;
+  color:var(--ink-3);
+  margin-top:14px;
+  max-width:70ch;
+}
+figcaption b{color:var(--ink-2);font-weight:600}
+
+/* ---------- evidence ladder ---------- */
+.ladder{display:flex;flex-direction:column;gap:0;font-family:var(--sans)}
+.lad-head{
+  display:grid;
+  grid-template-columns:minmax(150px,1.35fr) 168px minmax(120px,1fr);
+  gap:18px;
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  font-weight:600;
+  padding-bottom:10px;
+  border-bottom:1px solid var(--rule);
+}
+.lad-row{
+  display:grid;
+  grid-template-columns:minmax(150px,1.35fr) 168px minmax(120px,1fr);
+  gap:18px;
+  align-items:center;
+  padding:11px 0;
+  border-bottom:1px solid var(--rule-soft);
+  font-size:14px;
+}
+.lad-name{color:var(--ink);font-weight:500;line-height:1.5}
+.lad-note{color:var(--ink-3);font-size:12.5px;line-height:1.5}
+.lad-track{display:flex;gap:4px}
+.lad-track span{height:9px;flex:1;border-radius:2px;background:var(--track-off)}
+.lad-track .on{background:currentColor}
+.t4{color:var(--ev-a)}
+.t3{color:var(--ev-b)}
+.t2{color:var(--ev-c)}
+.t1{color:var(--ev-d)}
+.lad-scale{
+  display:grid;
+  grid-template-columns:minmax(150px,1.35fr) 168px minmax(120px,1fr);
+  gap:18px;
+  font-size:11px;
+  color:var(--ink-3);
+  padding-top:10px;
+}
+.lad-scale div:nth-child(2){display:flex;justify-content:space-between}
+@media (max-width:640px){
+  .lad-head,.lad-scale{display:none}
+  .lad-row{grid-template-columns:1fr;gap:7px;padding:14px 0}
+  .lad-row .lad-track{width:168px}
+}
+
+/* ---------- data tables ---------- */
+.table-wrap{overflow-x:auto;margin:26px 0 30px;border:1px solid var(--rule);border-radius:4px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-family:var(--sans);font-size:14px}
+caption{
+  font-family:var(--sans);
+  font-size:13px;
+  color:var(--ink-3);
+  text-align:left;
+  padding:16px 20px 0;
+  caption-side:top;
+}
+th,td{padding:12px 20px;text-align:left;vertical-align:top;line-height:1.6;border-bottom:1px solid var(--rule-soft)}
+thead th{
+  font-size:11px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  font-weight:600;
+  border-bottom:1px solid var(--rule);
+}
+tbody tr:last-child td{border-bottom:none}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+td strong{font-weight:600}
+
+/* ---------- callout ---------- */
+.callout{
+  border-left:3px solid var(--accent);
+  background:var(--surface);
+  padding:22px 26px;
+  margin:30px 0;
+  border-radius:0 4px 4px 0;
+}
+.callout p{margin:0;max-width:62ch}
+.callout p + p{margin-top:14px}
+.callout .tag{
+  font-family:var(--sans);
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--accent);
+  display:block;
+  margin-bottom:10px;
+}
+
+.caution{
+  border:1px solid var(--ev-d);
+  background:var(--ev-d-bg);
+  border-radius:4px;
+  padding:22px 26px;
+  margin:30px 0;
+}
+.caution .tag{color:var(--ev-d)}
+.caution p{margin:0;max-width:62ch;color:var(--ink)}
+.caution p + p{margin-top:12px}
+
+/* ---------- key figure inline ---------- */
+.stat-row{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(158px,1fr));
+  gap:1px;
+  background:var(--rule);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  overflow:hidden;
+  margin:28px 0 32px;
+}
+.stat{background:var(--surface);padding:18px 20px}
+.stat .v{
+  font-family:var(--sans);
+  font-size:26px;
+  font-weight:600;
+  letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums;
+  line-height:1.2;
+  display:block;
+  color:var(--ink);
+}
+.stat .k{
+  font-family:var(--sans);
+  font-size:12.5px;
+  color:var(--ink-3);
+  line-height:1.55;
+  display:block;
+  margin-top:7px;
+}
+
+/* ---------- footer ---------- */
+.endnote{
+  border-top:1px solid var(--rule);
+  margin-top:72px;
+  padding-top:32px;
+  font-family:var(--sans);
+  font-size:13.5px;
+  line-height:1.8;
+  color:var(--ink-2);
+}
+.endnote h2{font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:600;margin:0 0 16px}
+.endnote p{max-width:68ch;margin:0 0 14px}
+.endnote ul{margin:0 0 18px;padding-left:18px;max-width:68ch;display:flex;flex-direction:column;gap:9px}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important}
+}
+</style>
+
+</head>
+<body>
+<div class="page">
+
+<header class="masthead">
+  <p class="kicker">臨床技術回顧 · 2026</p>
+  <h1>AI、AR 與智慧導航<br>進入胸腔外科</h1>
+  <p class="standfirst">三類技術被同一個結構性變化推上檯面：肺癌篩檢普及後，胸腔外科的工作重心從「治療大腫瘤」轉為「處理大量小結節」。本文整理它們各自要解決的臨床缺口、目前的證據強度，以及被行銷語言掩蓋的落差。</p>
+  <p class="byline"><span><b>範圍</b> 肺結節診斷、定位、亞肺葉切除、圍術期管理</span><span><b>證據截止</b> 2026 年 9 月</span><span><b>地域重點</b> 台灣、日本、中國、歐美</span></p>
+</header>
+
+<div class="shell">
+
+  <nav class="toc" aria-label="章節目錄">
+    <h2>目錄</h2>
+    <ol>
+      <li><a href="#s1"><span class="num">01</span>五個臨床缺口</a></li>
+      <li><a href="#s2"><span class="num">02</span>共同瓶頸：影像與病人對不上</a></li>
+      <li><a href="#s3"><span class="num">03</span>已落地的技術</a></li>
+      <li><a href="#s4"><span class="num">04</span>AR 結節定位</a></li>
+      <li><a href="#s5"><span class="num">05</span>導航支氣管鏡</a></li>
+      <li><a href="#s6"><span class="num">06</span>仍在概念驗證的部分</a></li>
+      <li><a href="#s7"><span class="num">07</span>發展趨勢</a></li>
+      <li><a href="#s8"><span class="num">08</span>證據品質與法規</a></li>
+      <li><a href="#s9"><span class="num">09</span>台灣的處境</a></li>
+      <li><a href="#s10"><span class="num">10</span>結語</a></li>
+    </ol>
+  </nav>
+
+  <article>
+
+    <div class="legend">
+      <h2>本文使用的證據標記</h2>
+      <div class="legend-grid">
+        <div class="legend-item"><span class="ev ev-a">統合分析／RCT</span><span>隨機對照試驗或其統合分析支持</span></div>
+        <div class="legend-item"><span class="ev ev-b">前瞻／多中心</span><span>前瞻性或多中心世代研究</span></div>
+        <div class="legend-item"><span class="ev ev-c">回溯／小樣本</span><span>回溯性、單中心或案例系列</span></div>
+        <div class="legend-item"><span class="ev ev-d">產業動態</span><span>新聞稿、預印本或媒體報導，引用前須另行查證</span></div>
+      </div>
+    </div>
+
+    <!-- ============ 1 ============ -->
+    <section id="s1">
+      <span class="sec-num">01</span>
+      <h2 class="sec">五個臨床缺口，而不是五個新玩具</h2>
+      <p class="sec-lede">AI、AR 與智慧導航在胸腔外科不是三條各自獨立的技術路線。它們回應的是同一組因為篩檢與微創化而同時浮現的問題。</p>
+
+      <h3>篩檢造成的小結節海嘯，超出既有診斷工具的能力</h3>
+      <p>低劑量電腦斷層（LDCT）篩檢的效益已經確立：美國 <a href="https://www.nejm.org/doi/full/10.1056/NEJMoa1102873">NLST</a> 證實可降低 20% 肺癌特異死亡率，歐洲 <a href="https://www.nejm.org/doi/full/10.1056/NEJMoa1911793">NELSON</a> 顯示十年可降低男性約 24%。台灣的 <a href="https://pubmed.ncbi.nlm.nih.gov/38042167/">TALENT 研究</a>（12,011 名非吸菸高風險者、17 家醫學中心）首輪偵測率達 2.6%，遠高於 NLST 的 1.1%，並促成國健署自 <a href="https://www.mohw.gov.tw/cp-5269-70268-1.html">2022 年 7 月起提供公費篩檢</a>。<span class="ev ev-a">統合分析／RCT</span></p>
+      <p>代價是大量周邊型小結節——多數小於 2 公分、位於肺外三分之一、絕大多數是良性，但每一顆都需要安全而有效率的鑑別。這正是後續所有技術的共同起點。</p>
+
+      <h3>傳統取樣工具接不住這個量</h3>
+      <p>傳統可撓式支氣管鏡對周邊病灶的敏感度僅約 34%，導引式支氣管鏡雖可將整體診斷率提升至約 70%（<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3425336/">Gould 等，CHEST 2012 統合分析</a>），仍有明顯缺口。<span class="ev ev-a">統合分析／RCT</span> 另一端的 CT 導引經皮穿刺切片診斷率雖高達 88–93%，但氣胸率介於 28–41%——高診斷率是用併發症換來的。<span class="ev ev-b">前瞻／多中心</span></p>
+
+      <h3>微創化讓外科醫師失去了手指</h3>
+      <p>單孔胸腔鏡手術（uniportal VATS）與機器人輔助手術（RATS）成為主流後，器械細長、缺乏力回饋，直徑小於 1 公分的結節與純毛玻璃病灶在術中幾乎無法觸診定位；肺葉萎陷後位置還會再次偏移。「找不到病灶」是微創時代特有的痛點，也是 AR 定位技術最直接的切入點。</p>
+
+      <h3>亞肺葉切除把難度轉嫁給術者的空間想像力</h3>
+      <p>當肺段切除取代肺葉切除成為早期肺癌的選項，肺動靜脈與支氣管分支的高變異率、段間平面（intersegmental plane）的判定，都高度依賴術者能否在腦中把二維橫斷面 CT 重建成三維結構。以 Synapse Vincent 重建 316 條肺動脈分支的研究顯示，即使有 3D 模型，仍有 2.2% 與術中所見不符。<span class="ev ev-c">回溯／小樣本</span> 這是可以被技術分擔的認知負擔，也是術前 3D 規劃最早落地的原因。</p>
+
+      <h3>圍術期評估與術後監測的精度不足</h3>
+      <p>傳統圍術期死亡率評估工具（如 Thoracoscore）表現有限，AUC 約 0.72；出院後的連續監測則幾乎是空白。這一塊是 AI 預測模型與穿戴式裝置嘗試填補的空間，但也是目前證據最鬆散的一塊。</p>
+    </section>
+
+    <!-- ============ 2 ============ -->
+    <section id="s2">
+      <span class="sec-num">02</span>
+      <h2 class="sec">共同瓶頸：術前影像與術中的病人對不上</h2>
+      <p class="sec-lede">導航支氣管鏡談的 CT-to-body divergence，和 AR 疊合談的形變配準誤差，其實是同一個問題的兩面。理解這一點，才能看懂整個領域的技術路線為何全部收斂到同一個方向。</p>
+
+      <p>術前 CT 取得於吸氣末、肺完全擴張的狀態；術中卻是單肺通氣、肺塌陷、器械擠壓。導管以為自己抵達了病灶，實際上沒有；AR 模型疊上去的血管位置，不是真正的血管位置。這個偏差不是校準不良，而是器官本身改變了形狀。</p>
+
+      <figure>
+        <div class="fig-frame">
+          <svg viewBox="0 0 880 400" role="img" aria-label="示意圖：術前 CT 於肺擴張狀態規劃路徑，術中肺塌陷造成導管尖端與實際病灶位置偏離，需以術中 CBCT、斷層合成或即時形變模型重新配準">
+            <defs>
+              <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0,1 L9,5 L0,9 z" fill="currentColor"></path>
+              </marker>
+              <marker id="ar-acc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0,1 L9,5 L0,9 z" fill="#2A8D99"></path>
+              </marker>
+            </defs>
+
+            <!-- panel 1 -->
+            <text x="24" y="40" font-family="sans-serif" font-size="13" font-weight="600" fill="currentColor">術前 CT　吸氣末・肺完全擴張</text>
+            <rect x="24" y="56" width="250" height="230" rx="3" fill="none" stroke="currentColor" stroke-width="1" opacity=".35"></rect>
+            <ellipse cx="152" cy="172" rx="88" ry="98" fill="currentColor" opacity=".07"></ellipse>
+            <ellipse cx="152" cy="172" rx="88" ry="98" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".5"></ellipse>
+            <path d="M62,96 C100,130 118,150 140,164" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="4 3" opacity=".75"></path>
+            <circle cx="152" cy="172" r="9" fill="#2A8D99"></circle>
+            <text x="152" y="204" font-family="sans-serif" font-size="12" text-anchor="middle" fill="currentColor">目標病灶</text>
+            <text x="62" y="88" font-family="sans-serif" font-size="11.5" text-anchor="middle" fill="currentColor" opacity=".8">氣道入口</text>
+
+            <!-- arrow 1 -->
+            <line x1="286" y1="172" x2="336" y2="172" stroke="currentColor" stroke-width="1.4" marker-end="url(#ar)"></line>
+            <text x="311" y="160" font-family="sans-serif" font-size="11.5" text-anchor="middle" fill="currentColor">規劃路徑</text>
+
+            <!-- panel 2 -->
+            <text x="348" y="40" font-family="sans-serif" font-size="13" font-weight="600" fill="currentColor">術中　單肺通氣・肺塌陷</text>
+            <rect x="348" y="56" width="250" height="230" rx="3" fill="none" stroke="currentColor" stroke-width="1" opacity=".35"></rect>
+            <ellipse cx="470" cy="186" rx="66" ry="76" fill="currentColor" opacity=".07"></ellipse>
+            <ellipse cx="470" cy="186" rx="66" ry="76" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".5"></ellipse>
+            <ellipse cx="476" cy="172" rx="88" ry="98" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity=".28"></ellipse>
+            <path d="M386,110 C420,142 440,158 462,166" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="4 3" opacity=".75"></path>
+            <circle cx="464" cy="166" r="5" fill="none" stroke="currentColor" stroke-width="1.6"></circle>
+            <circle cx="486" cy="212" r="9" fill="#2A8D99"></circle>
+            <line x1="468" y1="172" x2="480" y2="205" stroke="#C0604F" stroke-width="2"></line>
+            <text x="540" y="192" font-family="sans-serif" font-size="11.5" fill="currentColor">導管尖端</text>
+            <text x="540" y="240" font-family="sans-serif" font-size="11.5" fill="currentColor">實際病灶</text>
+            <line x1="536" y1="188" x2="474" y2="170" stroke="currentColor" stroke-width=".9" opacity=".5"></line>
+            <line x1="536" y1="236" x2="496" y2="216" stroke="currentColor" stroke-width=".9" opacity=".5"></line>
+            <text x="416" y="300" font-family="sans-serif" font-size="12" font-weight="600" fill="#C0604F">配準誤差</text>
+
+            <!-- arrow 2 back -->
+            <line x1="676" y1="172" x2="612" y2="172" stroke="#2A8D99" stroke-width="1.6" marker-end="url(#ar-acc)"></line>
+            <text x="644" y="160" font-family="sans-serif" font-size="11.5" text-anchor="middle" fill="#2A8D99">即時重新配準</text>
+
+            <!-- panel 3 -->
+            <text x="688" y="40" font-family="sans-serif" font-size="13" font-weight="600" fill="currentColor">校正手段</text>
+            <rect x="688" y="60" width="168" height="46" rx="3" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".6"></rect>
+            <text x="772" y="88" font-family="sans-serif" font-size="12.5" text-anchor="middle" fill="currentColor">術中 CBCT</text>
+            <rect x="688" y="120" width="168" height="46" rx="3" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".6"></rect>
+            <text x="772" y="142" font-family="sans-serif" font-size="12.5" text-anchor="middle" fill="currentColor">數位斷層合成</text>
+            <text x="772" y="158" font-family="sans-serif" font-size="11" text-anchor="middle" fill="currentColor" opacity=".7">TiLT+ / AI Tomo</text>
+            <rect x="688" y="180" width="168" height="46" rx="3" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 3" opacity=".45"></rect>
+            <text x="772" y="202" font-family="sans-serif" font-size="12.5" text-anchor="middle" fill="currentColor" opacity=".75">即時形變模型</text>
+            <text x="772" y="218" font-family="sans-serif" font-size="11" text-anchor="middle" fill="currentColor" opacity=".55">尚在研發</text>
+            <line x1="688" y1="248" x2="856" y2="248" stroke="currentColor" stroke-width="1" opacity=".25"></line>
+            <text x="688" y="270" font-family="sans-serif" font-size="11" fill="currentColor" opacity=".6">虛線＝尚未臨床可用</text>
+          </svg>
+        </div>
+        <figcaption><b>圖一．</b>術前規劃影像與術中解剖之間的偏差，是導航支氣管鏡與術中 AR 共同的失敗來源。目前臨床可用的校正手段都屬於「術中再取一次影像」；真正能即時模擬肺塌陷形變的模型仍在研發階段。Peek 等人在活體胸腔鏡手術中量測到的平均關鍵點偏差達 6.6 公釐。</figcaption>
+      </figure>
+
+      <p>認清這一點，就能解釋兩件事。第一，為什麼機器人支氣管鏡「更靈巧」卻沒有帶來預期的診斷率躍升——靈巧解決的是到達問題，不是知道自己在哪的問題。第二，為什麼所有主要平台近年的更新都在整合術中影像，而不是繼續改良機械臂。</p>
+    </section>
+
+    <!-- ============ 3 ============ -->
+    <section id="s3">
+      <span class="sec-num">03</span>
+      <h2 class="sec">已經落地的部分：證據最強的反而是最樸素的技術</h2>
+      <p class="sec-lede">如果只看哪些技術有隨機對照試驗或統合分析支持，名單和媒體版面上的名單幾乎沒有重疊。</p>
+
+      <h3>術前 3D 重建與虛擬手術規劃</h3>
+      <p>這是目前證據最強的一項。<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12453671/">He 等人發表於 European Journal of Cardio-Thoracic Surgery（2025）的系統性回顧與統合分析</a>納入 10 篇研究、共 1,424 例病人，結果顯示 3D 重建組的切緣不足風險顯著下降（OR 0.09，95% CI 0.02–0.50），術後併發症率顯著下降（OR 0.53，95% CI 0.38–0.74）；在複雜段切除的子群中，手術時間縮短 10.85 分鐘、出血量減少 5.41 毫升。整體族群的手術時間、出血量、淋巴結摘除數與住院天數則無顯著差異。<span class="ev ev-a">統合分析／RCT</span></p>
+
+      <div class="stat-row">
+        <div class="stat"><span class="v">OR 0.09</span><span class="k">切緣不足風險<br>95% CI 0.02–0.50</span></div>
+        <div class="stat"><span class="v">OR 0.53</span><span class="k">術後併發症<br>95% CI 0.38–0.74</span></div>
+        <div class="stat"><span class="v">−10.85 <span style="font-size:15px">分鐘</span></span><span class="k">複雜段切除<br>手術時間</span></div>
+        <div class="stat"><span class="v">1,424</span><span class="k">納入病人數<br>10 篇研究</span></div>
+      </div>
+
+      <p>臨床上使用的平台包括日本的 Synapse Vincent 與 Ziosoft REVORAS、法國的 Visible Patient、美國的 IQQA-3D 與 Materialise Mimics。近兩年的研究另外證實，非顯影劑重建的 3D 模型對於顯影劑禁忌的病人是可靠的替代方案。這項技術在日本與中國已屬常規，並於 2026 年進入日本胸腔外科的<a href="https://onlinelibrary.wiley.com/doi/10.1111/ases.70196">專家共識討論</a>。<span class="ev ev-b">前瞻／多中心</span></p>
+
+      <h3>ICG 螢光判定段間平面</h3>
+      <p>以吲哚菁綠（ICG）螢光顯影標定段間平面，已有<a href="https://www.sciencedirect.com/science/article/pii/S1015958424015720">多篇統合分析</a>證實優於單純的膨脹—萎陷法，是目前判定段間平面最常用的輔助手段，屬成熟標準技術。<span class="ev ev-a">統合分析／RCT</span></p>
+
+      <h3>AI 肺結節偵測與風險預測</h3>
+      <p>影像端是 AI 唯一大規模通過法規並實際進入臨床的領域。<a href="https://ascopubs.org/doi/10.1200/JCO.22.01345">Sybil（Journal of Clinical Oncology, 2023）</a>僅用單次 LDCT 即可預測未來 1 至 6 年的肺癌風險，一年 AUC 達 0.92、六年 C-index 0.75，並已在台灣長庚醫院完成外部驗證。<a href="https://optellum.com/fda-clearance/">Optellum Virtual Nodule Clinic</a> 於 2021 年取得 FDA 510(k)，是全球第一個獲清核的肺結節惡性度 AI 決策支援軟體。<span class="ev ev-b">前瞻／多中心</span></p>
+      <p>台灣方面，TFDA 已於 2024 年 2 月核准 LDCT-AI 輔助判讀程式（經台大、三軍總醫院、萬芳醫院驗證，偵測大於 6 公釐結節準確度逾 90%），睿傳數據的「LibraLung 天秤肺影」亦取得核准，結節偵測 Recall 達 92%（<a href="https://www.mohw.gov.tw/cp-16-79700-1.html">衛福部</a>、<a href="https://www.fda.gov.tw/tc/siteListContent.aspx?sid=310&amp;id=42528">TFDA 核准清單</a>）。國際上另有 Qure.ai qCT LN Quant、Median Technologies eyonis LCS 等產品陸續獲准。<span class="ev ev-c">回溯／小樣本</span></p>
+
+      <h3>VR 訓練與 3D 列印教學</h3>
+      <p>VATS 肺葉切除的 VR 模擬器已建立完整的信效度證據：以 VATSAT 工具對 41 位受試者進行 123 例模擬手術評分，內部一致性信度 0.94、評分者間信度 0.85、重測信度 0.90，可有效區分新手與資深術者（<a href="https://pubmed.ncbi.nlm.nih.gov/30225606/">相關驗證研究</a>）。3D 列印模型則已有<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11168317/">小型隨機試驗</a>顯示：對資深術者而言與數位 3D 重建效果相當，但對資淺醫師理解複雜解剖具額外教育價值。<span class="ev ev-a">統合分析／RCT</span></p>
+    </section>
+
+    <!-- ============ 4 ============ -->
+    <section id="s4">
+      <span class="sec-num">04</span>
+      <h2 class="sec">AR 結節定位：進展最快的一塊，而且集中在中國</h2>
+      <p class="sec-lede">在整個 AR 應用光譜中，經皮與術中結節定位是唯一已經進入多中心隨機試驗、接近臨床常規化的分支。</p>
+
+      <p>這一類研究的設計相當一致：以 AR 或混合實境導引取代傳統 CT 導引的鉤針（hook-wire）定位，比較定位誤差、操作時間、輻射劑量與併發症。</p>
+
+      <div class="table-wrap">
+        <table>
+          <caption>AR／MR 結節定位的主要隨機對照試驗</caption>
+          <thead>
+            <tr><th scope="col">研究</th><th scope="col">樣本</th><th scope="col">主要結果</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12175789/">Song 等</a><br><span style="color:var(--ink-3)">Int J Surg, 2025</span></td>
+              <td class="num">70 例<br>AR 35 / CT 35</td>
+              <td>定位誤差 <strong>3.1 vs. 5.4 公釐</strong>；操作時間 8.8 vs. 14.1 分鐘；輻射劑量 421 vs. 694 mGy·cm；氣胸率相同（5.7%）</td>
+            </tr>
+            <tr>
+              <td><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC13522787/">Huang 等（上海肺科）</a><br><span style="color:var(--ink-3)">Cell Rep Med, 2026</span></td>
+              <td class="num">168 例<br>HoloLens 2</td>
+              <td>定位誤差 4.5 vs. 6.5 公釐；<strong>單次穿刺成功率 77.4% vs. 1.2%</strong>；輻射劑量顯著降低</td>
+            </tr>
+            <tr>
+              <td><a href="https://jamanetwork.com/journals/jamasurgery/article-abstract/2851476">五中心試驗</a><br><span style="color:var(--ink-3)">JAMA Surgery, 2026</span></td>
+              <td class="num">296 例隨機<br>270 例 mITT</td>
+              <td>單次全身麻醉下 AR 導引，對比傳統多次穿刺加轉送手術室流程的非劣性</td>
+            </tr>
+            <tr>
+              <td><a href="https://pubmed.ncbi.nlm.nih.gov/41927720/">MR vs. CT hook-wire</a><br><span style="color:var(--ink-3)">2026</span></td>
+              <td class="num">90 例</td>
+              <td>準確度、效率與安全性相當，達非劣性</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>其中最值得注意的數字是單次穿刺成功率 77.4% 對 1.2%。這不是漸進式改善，而是流程性質的改變——它把「反覆調整針道、反覆掃描」變成「一次到位」，同時解釋了輻射劑量為何顯著下降。<span class="ev ev-a">統合分析／RCT</span></p>
+
+      <div class="callout">
+        <span class="tag">一個值得在討論中點出的現象</span>
+        <p>這幾篇高等級試驗幾乎全部來自中國的醫學中心。這既反映當地龐大的手術量與試驗執行能力，也意味著這些結果在不同醫療體系下的可移轉性尚待驗證——包括病人結節特性、術者訓練背景與手術室流程的差異。</p>
+      </div>
+    </section>
+
+    <!-- ============ 5 ============ -->
+    <section id="s5">
+      <span class="sec-num">05</span>
+      <h2 class="sec">導航支氣管鏡：機器人不是重點，術中影像才是</h2>
+      <p class="sec-lede">這個領域有一個容易被行銷語言蓋過的關鍵結果，值得單獨拿出來講。</p>
+
+      <p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10797863/">RELIANT 試驗</a>是目前唯一真正的前瞻性頭對頭隨機對照試驗，納入 411 例意向治療分析。結果：機器人輔助支氣管鏡診斷率 77.8%，電磁導航支氣管鏡 75.5%，<strong>兩者無顯著差異</strong>。機器人平台只是「非劣於」電磁導航，不是優於。<span class="ev ev-a">統合分析／RCT</span></p>
+
+      <p>對照之下，早期廣被引用的 <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10566151/">PRECISION-1</a> 屍體模型研究曾顯示機器人導航成功率 80%、電磁導航 45%、傳統支氣管鏡 25%——但屍體模型沒有呼吸運動，也就沒有 CT-to-body divergence，因此很可能高估了活體表現。<span class="ev ev-c">回溯／小樣本</span></p>
+
+      <h3>真正拉開差距的是術中即時三維影像</h3>
+      <p>當導航平台整合術中影像以校正形變偏差時，數字才出現實質變化：</p>
+      <ul class="body-list">
+        <li><strong>CONFIRM 研究</strong>（Ion 搭配移動式 CT，155 例）：器械抵達病灶率 99.4%、嚴格定義診斷率 89%、<strong>氣胸 0 例</strong>（<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12172655/">相關回顧</a>）。<span class="ev ev-b">前瞻／多中心</span></li>
+        <li><strong>CBCT 導航支氣管鏡對比 CT 導引經皮切片</strong>（895 例）：診斷率相當（90.7% 對 92.6%），但<strong>氣胸率 1.8% 對 31.4%</strong>、總併發症率 4.3% 對 41.6%（<a href="https://www.sciencedirect.com/science/article/pii/S0012369226004162">CHEST, 2026</a>）。<span class="ev ev-b">前瞻／多中心</span></li>
+      </ul>
+      <p>換句話說，導航技術對病人最明確的貢獻不是提高診斷率，而是在維持相當診斷率的前提下大幅降低併發症。這在向病人或行政單位說明價值時，是比「診斷率更高」更站得住腳的論述。</p>
+
+      <p>產業的整合方向也印證了這一點：Monarch QUEST 整合錐狀束電腦斷層、Noah Medical Galaxy 的 TiLT+ 斷層合成（<a href="https://www.noahmed.com/press-releases/the-galaxy-system-receives-fda-clearance-for-robotic-navigated-bronchoscopy">2023 年 FDA 清核</a>）、Body Vision LungVision 的 AI Tomo，都在補同一個洞。Intuitive Ion 則於 <a href="https://www.medtechdive.com/news/intuitive-gains-fda-clearance-for-ion-lung-catheter/548768/">2019 年取得 FDA 清核</a>。<span class="ev ev-d">產業動態</span></p>
+
+      <h3>術中定位方法的選擇</h3>
+      <p>對外科端而言，導航的另一個用途是術前或術中把摸不到的病灶標記出來。經皮鉤針與微線圈（microcoil）的比較顯示，兩者氣胸率相近（約 34.8% 對 34.9%），但微線圈移位率更低、疼痛與肺出血發生率顯著較低（13% 對 46.5%）（<a href="https://link.springer.com/article/10.1007/s00330-018-5939-4">European Radiology</a>）。<span class="ev ev-a">統合分析／RCT</span></p>
+      <p>日本發展的 <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10093148/">VAL-MAP（虛擬輔助肺定位技術）</a>以術前支氣管鏡進行多點染料標記，已納入日本健保並累積十年成果。混合手術室中則常以電磁導航或機器人支氣管鏡導引注射<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9274119/">三重染料</a>（ICG、亞甲藍、含碘顯影劑），文獻報告導航成功率 100%、定位成功率約 80%，且因定位與手術在同一次麻醉下完成，優於分兩次進行的經皮定位。<span class="ev ev-c">回溯／小樣本</span></p>
+
+      <p>導航技術近年也從診斷延伸為治療載體：<a href="https://ctv.veeva.com/study/power-study-prospective-transbronchial-microwave-robotic-assisted-bronchoscopy">POWER 研究</a>結合 Monarch 機器人平台、NEUWAVE 微波消融與 CBCT 確認，處理肺部寡轉移病灶，是「診斷即治療」路線的代表。<span class="ev ev-c">回溯／小樣本</span></p>
+
+      <div class="caution">
+        <span class="tag">導入前必須納入評估</span>
+        <p>電磁導航支氣管鏡的學習曲線研究顯示，<strong>氣胸率與診斷率約在累積 60 例之後才顯著改善</strong>（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11094565/">相關分析</a>）。對年度病例量有限的中小型醫學中心，這是一道實質門檻——設備成本之外，還要有足夠的病例量把團隊帶過學習曲線。</p>
+      </div>
+    </section>
+
+    <!-- ============ 6 ============ -->
+    <section id="s6">
+      <span class="sec-num">06</span>
+      <h2 class="sec">仍在概念驗證的部分：術中 AR 疊合導航</h2>
+      <p class="sec-lede">真正取代觸診、在術野上即時引導切割線的那個願景，證據其實非常薄。這一節與前兩節的落差，是本文最想指出的重點。</p>
+
+      <p>Erasmus MC 的 <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12034595/">Peek 等人（2024）</a>首次在活體胸腔鏡與機器人手術中以立體內視鏡影像產生即時點雲，並將術前 3D 血管與支氣管模型進行剛性配準疊合。研究共 8 例。重投影誤差確實很低（VATS 0.34 像素、RATS 0.22 像素、點雲精度中位絕對誤差 0.20 公釐），但——<strong>成功疊合率只有 62.5%（5 例／8 例）</strong>，3 例因器械遮擋、鏡頭髒污與術野出血而失敗；且 AR 疊合建立耗時約 5 分鐘，<strong>並非即時</strong>。作者本人明確定位這是「AR 應用於肺部手術的首例技術驗證」。<span class="ev ev-c">回溯／小樣本</span></p>
+
+      <p>另一條路線是可形變模型。<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12881800/">Pulmo-SR（JTCVS Techniques, 2025）</a>以深度學習自動分割肺動靜脈、氣道與肺葉，再以有限元素法建立可形變的四維模型，透過達文西 TilePro 顯示。30 例回溯驗證的分割準確度很高（動脈 0.987、靜脈 0.976、支氣管 1.00），重建僅需 8.47 秒、畫面更新率超過 85 fps。但作者同樣明講：<strong>模型仍需手動形變，且仍基於術前充氣狀態，未能真實模擬術中肺萎陷</strong>。<span class="ev ev-c">回溯／小樣本</span></p>
+
+      <p>還有兩項常被忽略的現實。第一，目前臨床上把 3D 模型放進達文西視野的做法，多是透過 TilePro 的<strong>子畫面並排顯示</strong>，而不是真正的影像疊合配準。第二，Apple Vision Pro 用於肺部手術血管辨識的臨床試驗（<a href="https://clinicaltrials.gov/study/NCT07573748">NCT07573748</a>）仍在進行，尚無發表結果。</p>
+
+      <div class="callout">
+        <span class="tag">寫作與簡報時務必分清</span>
+        <p>截至目前，<strong>沒有任何一篇針對「AR 術中導航段切除」本身的大型隨機對照試驗</strong>。把第 04 節的結節定位試驗成果拿來支持術中疊合導航，是常見但站不住腳的推論——兩者是不同的臨床情境、不同的技術難度，證據也不能互相借用。</p>
+      </div>
+
+      <h3>整體證據地圖</h3>
+      <p>把前四節放在一起看，圖像相當清楚：</p>
+
+      <figure>
+        <div class="fig-frame">
+          <div class="ladder">
+            <div class="lad-head"><div>技術</div><div>最高證據等級</div><div>代表證據</div></div>
+
+            <div class="lad-row"><div class="lad-name">術前 3D 重建規劃</div><div class="lad-track t4" role="img" aria-label="證據等級 4，統合分析"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span></div><div class="lad-note">EJCTS 2025 統合分析，1,424 例</div></div>
+
+            <div class="lad-row"><div class="lad-name">ICG 判定段間平面</div><div class="lad-track t4" role="img" aria-label="證據等級 4，統合分析"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span></div><div class="lad-note">多篇統合分析</div></div>
+
+            <div class="lad-row"><div class="lad-name">經皮定位：微線圈 vs. 鉤針</div><div class="lad-track t4" role="img" aria-label="證據等級 4，統合分析"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span></div><div class="lad-note">Eur Radiol 統合分析</div></div>
+
+            <div class="lad-row"><div class="lad-name">AR／MR 結節定位</div><div class="lad-track t3" role="img" aria-label="證據等級 3，隨機對照試驗"><span class="on"></span><span class="on"></span><span class="on"></span><span></span></div><div class="lad-note">多篇 RCT，尚無統合分析</div></div>
+
+            <div class="lad-row"><div class="lad-name">導航支氣管鏡（ENB／機器人）</div><div class="lad-track t3" role="img" aria-label="證據等級 3，隨機對照試驗"><span class="on"></span><span class="on"></span><span class="on"></span><span></span></div><div class="lad-note">RELIANT RCT，411 例</div></div>
+
+            <div class="lad-row"><div class="lad-name">VR 訓練與能力評估</div><div class="lad-track t3" role="img" aria-label="證據等級 3，隨機對照試驗"><span class="on"></span><span class="on"></span><span class="on"></span><span></span></div><div class="lad-note">信效度驗證研究</div></div>
+
+            <div class="lad-row"><div class="lad-name">3D 列印輔助規劃與教學</div><div class="lad-track t3" role="img" aria-label="證據等級 3，隨機對照試驗"><span class="on"></span><span class="on"></span><span class="on"></span><span></span></div><div class="lad-note">小型 RCT 與準隨機試驗</div></div>
+
+            <div class="lad-row"><div class="lad-name">AI 肺結節偵測與風險預測</div><div class="lad-track t2" role="img" aria-label="證據等級 2，前瞻或多中心世代研究"><span class="on"></span><span class="on"></span><span></span><span></span></div><div class="lad-note">大型外部驗證，無臨床結果 RCT</div></div>
+
+            <div class="lad-row"><div class="lad-name">術後預測模型與穿戴監測</div><div class="lad-track t2" role="img" aria-label="證據等級 2，前瞻或多中心世代研究"><span class="on"></span><span class="on"></span><span></span><span></span></div><div class="lad-note">多中心世代研究</div></div>
+
+            <div class="lad-row"><div class="lad-name">手術影片相位辨識</div><div class="lad-track t1" role="img" aria-label="證據等級 1，回溯或案例系列"><span class="on"></span><span></span><span></span><span></span></div><div class="lad-note">回溯性資料集驗證</div></div>
+
+            <div class="lad-row"><div class="lad-name">術中 AR 即時疊合導航</div><div class="lad-track t1" role="img" aria-label="證據等級 1，回溯或案例系列"><span class="on"></span><span></span><span></span><span></span></div><div class="lad-note">活體 8 例可行性研究</div></div>
+
+            <div class="lad-row"><div class="lad-name">即時可形變 3D 模型</div><div class="lad-track t1" role="img" aria-label="證據等級 1，回溯或案例系列"><span class="on"></span><span></span><span></span><span></span></div><div class="lad-note">30 例回溯準確度驗證</div></div>
+
+            <div class="lad-row"><div class="lad-name">手術基礎模型與自主手術</div><div class="lad-track t1" role="img" aria-label="證據等級 1，回溯或案例系列"><span class="on"></span><span></span><span></span><span></span></div><div class="lad-note">回溯資料集、動物模型</div></div>
+
+            <div class="lad-scale"><div></div><div><span>案例系列</span><span>統合分析</span></div><div></div></div>
+          </div>
+        </div>
+        <figcaption><b>圖二．</b>四級證據階梯：1＝案例系列或回溯性研究，2＝前瞻性或多中心世代研究，3＝隨機對照試驗，4＝統合分析。媒體與廠商關注度大致與此圖倒序——曝光最高的三項落在最底部。</figcaption>
+      </figure>
+    </section>
+
+    <!-- ============ 7 ============ -->
+    <section id="s7">
+      <span class="sec-num">07</span>
+      <h2 class="sec">發展趨勢</h2>
+      <p class="sec-lede">五條可辨識的方向，以及它們各自距離臨床還有多遠。</p>
+
+      <h4>一、從「導航」走向「即時形變補償」</h4>
+      <p>所有技術路線最終都指向同一個目標：讓模型即時反映術中真實的肺萎陷狀態。目前有三條路徑——物理型生物力學模型（有限元素法）、資料驅動的深度學習影像配準，以及混合式感測融合框架。三者都還在技術路線圖階段，尚無臨床工具。</p>
+
+      <h4>二、診斷即治療（single-setting）</h4>
+      <p>導航平台從取樣工具擴展為治療載體，並在混合手術室中把「診斷—分期—消融—切除」壓縮進單次麻醉。這條路線的臨床誘因明確（減少重複侵入、縮短住院），但目前仍以單臂研究與早期試驗為主。<span class="ev ev-c">回溯／小樣本</span></p>
+
+      <h4>三、手術基礎模型與多模態</h4>
+      <p>大型影像基礎模型（如以 2,800 萬張影像訓練的 LCTfound、多模態的 M3FM）與手術場景理解模型陸續發表，並有手術影片相位辨識的多中心研究（LungSurg，222 支影片、8 中心，Top-3 準確度 88%）。但必須指出：這些模型<strong>幾乎全數僅有回溯性資料集驗證</strong>，在煙霧、出血、組織遮蔽與非典型解剖等分布外情境下的穩健性未知。<span class="ev ev-c">回溯／小樣本</span></p>
+      <p>語言模型的表現則提供了一個有用的校準點：一項針對胸腔外科諮詢的研究發現，<strong>100% 的回應含有至少一項小錯誤，36.6% 含有重大錯誤</strong>。這說明目前的定位只能是輔助，而非獨立臨床決策。</p>
+
+      <h4>四、數位孿生整合平台</h4>
+      <p>歐洲的代表是法國 IHU Strasbourg 的 <a href="https://www.ihu-strasbourg.eu/lancement-de-la-premiere-phase-pre-clinique-du-projet-fast-tx-a-lihu-strasbourg/?lang=en">FAST-Tx 計畫</a>，整合 Visible Patient 數位模型、ASARIA EagleEye AR 系統、Intuitive Ion 支氣管鏡機器人與術中 CBCT，目標是從診斷到微創手術的一站式數位孿生平台，2025 年完成首例。<strong>但公開資料仍以機構新聞稿為主，缺乏同儕審查的療效數據。</strong><span class="ev ev-d">產業動態</span></p>
+
+      <h4>五、自主手術：現實遠遠落後於敘事</h4>
+      <p>Yang 等人提出的 0 到 5 級自主分級已成為業界共同語言，但一篇發表於 <a href="https://www.nature.com/articles/s41746-024-01102-y">npj Digital Medicine（2024）</a>的系統性回顧發現：2015 至 2023 年間 FDA 核准的手術機器人中，<strong>86% 仍停留在 Level 1（機械輔助限制），僅 6% 達到 Level 3（條件式自主），Level 4 與 5 完全掛零</strong>。<span class="ev ev-a">統合分析／RCT</span></p>
+      <p>即使是備受矚目的 <a href="https://www.science.org/doi/10.1126/scirobotics.adt5254">SRT-H（Science Robotics, 2025）</a>——以語言指令條件式自主完成豬隻膽囊切除的特定手術相位——驗證場域仍限於離體組織與動物模型。<span class="ev ev-b">前瞻／多中心</span></p>
+
+      <div class="callout">
+        <span class="tag">對胸腔外科特別重要的一點</span>
+        <p>胸腔外科的自主化預期將<strong>明顯落後於泌尿科、婦科等軟組織手術</strong>。原因正是本文第 02 節談的同一件事：肺部呼吸運動造成的組織形變、單肺通氣下的解剖變異，使即時配準的難度高出一個量級（<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC13105563/">相關評論</a>）。在撰寫展望時，這一點值得誠實交代，而不是套用其他科別的時程。</p>
+      </div>
+
+      <p>此外，術後端也有值得注意的進展：Predicthor 模型（6,508 例、118 中心）圍術期死亡率預測 AUC 達 0.81，優於傳統 Thoracoscore 的 0.72；穿戴式裝置方面，以 Fitbit 靜息心率為基礎的 NightSignal 演算法敏感度 81%、陰性預測值 97%。<span class="ev ev-b">前瞻／多中心</span></p>
+    </section>
+
+    <!-- ============ 8 ============ -->
+    <section id="s8">
+      <span class="sec-num">08</span>
+      <h2 class="sec">證據品質與法規：三個必須誠實面對的問題</h2>
+      <p class="sec-lede">技術評估的難處不在於找不到正面結果，而在於判斷那些正面結果值多少。</p>
+
+      <h3>一、Spectrum bias 的鐵證</h3>
+      <p>一篇納入 95 篇研究、逾一萬顆結節的<a href="https://www.sciencedirect.com/science/article/pii/S0169500223007341">系統性回顧</a>發現：<strong>66.3% 的研究在 QUADAS-2 至少一個領域具高偏誤風險或適用性疑慮</strong>。更關鍵的是，低偏誤風險研究的診斷率（66%）<strong>反而低於</strong>高偏誤風險研究（71%）。<span class="ev ev-a">統合分析／RCT</span></p>
+      <p>這個方向性是典型的病例組成偏移訊號：越嚴謹的研究，數字越難看。實務上的意義是，看到某項技術宣稱的高診斷率時，第一個該問的不是「多高」，而是「這批病人是怎麼選進來的」。</p>
+
+      <h3>二、「診斷率」這個指標本身不可靠</h3>
+      <p>診斷率（diagnostic yield）的定義從未統一：是否納入非特異性良性結果？是否要求 12 個月追蹤才計入？結果是同一個 TARGET 試驗，嚴格定義算出 63.8%、中等定義 76.6%、寬鬆定義 87%。近期已有<a href="https://pubmed.ncbi.nlm.nih.gov/38142773/">明確呼籲</a>改以「診斷準確度」取代作為終點。在此之前，跨研究比較這個數字幾乎沒有意義。<span class="ev ev-a">統合分析／RCT</span></p>
+
+      <h3>三、多數系統跳過了外科創新的驗證分期</h3>
+      <p>依 IDEAL framework，外科創新應循 Idea → Development → Exploration → Assessment → Long-term 分期驗證。實務上，多數胸腔手術 AI 與 AR 系統停在 Development 階段就已上市銷售。報告規範是存在的——<a href="https://www.nature.com/articles/s41591-020-1034-x">CONSORT-AI</a> 與 SPIRIT-AI 規範試驗計畫書與結果報告、<a href="https://www.nature.com/articles/s41591-022-01772-9">DECIDE-AI</a> 針對早期臨床導入階段，STARD-AI 則仍在發展中——但少被遵循。</p>
+
+      <h3>法規面的變化</h3>
+      <ul class="body-list">
+        <li><strong>FDA</strong> 已於 2025 年 8 月發布<a href="https://www.fda.gov/medical-devices/software-medical-device-samd/predetermined-change-control-plans-machine-learning-enabled-medical-devices-guiding-principles">預定變更控制計畫（PCCP）</a>的指導原則，允許廠商在初次送審時預先描述未來的演算法更新範圍。這對持續學習型演算法很關鍵，但也留下疑慮：預先核准的變更範圍是否足以涵蓋模型漂移，且目前缺乏強制性的上市後追蹤要求。<span class="ev ev-b">前瞻／多中心</span></li>
+        <li><strong>歐盟</strong>的 AI Act 與 MDR 形成雙層規範：凡屬 MDR IIa 級以上、需公告機構介入的醫材，一律視為高風險 AI 系統，須額外滿足資料治理、可追溯性與人類監督要求。手術機器人是否適用「機械指令豁免」，仍是灰色地帶。</li>
+        <li><strong>責任歸屬</strong>目前傾向三層框架：演算法瑕疵歸廠商、導入流程失當歸院方、未依專業判斷推翻錯誤建議則歸臨床醫師。但此框架缺乏判例支持，跨國法域下的可執行性未知。</li>
+      </ul>
+
+      <p>最後值得一提的是專業社群自身的態度。<a href="https://www.annalsthoracicsurgery.org/article/S0003-4975(25)00852-5/abstract">STS 2025 年會發表的國際問卷</a>（424 名心胸外科醫師）顯示，女性、年輕，以及胸腔（相對於心臟）外科醫師對 AI 的角色抱持較保守的態度，且多數受訪者主張監管責任應由專業學會與政府共同承擔。目前尚無胸腔外科專科層級的正式 AI 使用指引。<span class="ev ev-b">前瞻／多中心</span></p>
+    </section>
+
+    <!-- ============ 9 ============ -->
+    <section id="s9">
+      <span class="sec-num">09</span>
+      <h2 class="sec">台灣的處境與導入建議</h2>
+      <p class="sec-lede">法規已經動起來，給付還沒有；影像 AI 有本土供應鏈，導航設備完全沒有。</p>
+
+      <h3>核准與給付脫節</h3>
+      <p>TFDA 已核准相當數量的 AI 醫材（2024 年初統計為 37 項國產、67 項進口），本土業者也陸續取得許可。但健保缺乏對應的給付項目，醫院導入後往往是「增加成本、無額外收入」，形成明確的商業模式困境（<a href="https://www.cio.com.tw/84822">相關產業分析</a>）。<span class="ev ev-b">前瞻／多中心</span></p>
+      <p>對照之下，中國已於 2026 年將機器人手術獨立納入 DRG／DIP 分組定價。台灣若持續以現行 DRG 打包模式處理高單價導航與機器人手術，導入誘因將持續受抑。<span class="ev ev-d">產業動態</span></p>
+
+      <h3>導航設備完全仰賴進口</h3>
+      <p>台灣本土手術導航新創集中在<strong>神經外科</strong>——鈦隼生物科技的 NaoTrac 已於 2025 年取得美國 FDA 510(k)，並持有 TFDA 與歐盟 CE 認證（<a href="https://www.sgs.com.tw/news-media-resources-content/page?id=1783">相關報導</a>）。但胸腔外科導航仍完全仰賴 Medtronic superDimension、Intuitive Ion 等進口設備，本土供應鏈與臨床證據皆屬空白。<span class="ev ev-d">產業動態</span></p>
+      <p>可及性方面，電磁導航與機器人支氣管鏡在台多屬自費項目（以亞東紀念醫院為例，「支氣管鏡導航 3D 立體定位術」自費 20,000 元，核定於 2025 年 1 月）。<span class="ev ev-c">回溯／小樣本</span></p>
+
+      <h3>導入的實務順序</h3>
+      <ul class="body-list">
+        <li><strong>先做有給付或自費空間明確的項目。</strong>不要一開始就選擇給付真空的全新術式，那會讓整個計畫在第一年就失去內部支持。</li>
+        <li><strong>優先投資可回溯驗證的低風險輔助工具。</strong>術前 3D 重建與 AR 定位輔助有統合分析與 RCT 支持、成本相對低、學習曲線平緩，是投資報酬最明確的起點；高自主等級系統應排在後面。</li>
+        <li><strong>成本效益評估必須納入學習曲線與失敗成本。</strong>前述 60 例的門檻意味著病例量不足的中心可能永遠停在曲線的壞側。</li>
+        <li><strong>採購合約應要求驗證透明度。</strong>要求廠商依 DECIDE-AI、SPIRIT-AI 規範提供上市前驗證細節，並明訂 PCCP 式的模型更新透明機制與院內上市後監測責任，而不是被動接受黑箱升級。</li>
+        <li><strong>資料基礎建設優先於單點採購。</strong>與國際多中心平台合作取得外部驗證資料，避免重蹈單中心 spectrum bias 的覆轍。</li>
+      </ul>
+    </section>
+
+    <!-- ============ 10 ============ -->
+    <section id="s10">
+      <span class="sec-num">10</span>
+      <h2 class="sec">結語</h2>
+      <p>把四個面向放在一起看，這個領域的真實狀態可以用三句話概括。</p>
+      <p><strong>第一，證據最強的技術，是最不像科幻的那些。</strong>術前 3D 重建、ICG 螢光、微線圈定位——它們有統合分析支持，且已在日本與中國成為常規。反而是頭戴式裝置術中疊合、手術基礎模型、自主手術這些佔據最多版面的項目，證據停在個位數病例的可行性研究。</p>
+      <p><strong>第二，導航技術對病人最明確的價值不是診斷率，而是併發症。</strong>RELIANT 證明機器人並不優於電磁導航；真正的差異來自術中即時影像對形變偏差的校正，而它帶來的最大改變是氣胸率從 31.4% 降到 1.8%。這個論述比「診斷率更高」更誠實，也更有說服力。</p>
+      <p><strong>第三，胸腔外科的智慧化時程不能套用其他科別。</strong>肺是會變形的器官，這一個事實同時解釋了導航的失準、AR 的配準困難，以及自主手術為何在此領域會走得比泌尿科慢。下一步的關鍵，是從「預測準確度」走向「預測—介入路徑—硬性臨床結果」的完整驗證循環。</p>
+    </section>
+
+    <div class="endnote">
+      <h2>資料來源與使用說明</h2>
+      <p>本文由四組平行文獻檢索彙整而成，涵蓋 PubMed／PMC、NEJM、JCO、CHEST、JTO、EJCTS、JTCVS Techniques、JAMA Surgery、Science Robotics、npj Digital Medicine、ClinicalTrials.gov、FDA 與 TFDA 公開資料，以及廠商與機構新聞稿。內文連結指向可公開取得的來源頁面。</p>
+      <p>引用前請注意以下幾點：</p>
+      <ul>
+        <li>標示<span class="ev ev-d">產業動態</span>的內容來自新聞稿、預印本或媒體報導，可信度低於同儕審查文獻，寫入正式文件前應另行查證原始資料。</li>
+        <li>Predicthor 模型、NightSignal 演算法與語言模型錯誤率等數據，本次檢索未取得穩定的公開連結，僅列數值供進一步查證。</li>
+        <li>Coreline AVIEW、Theator、Touch Surgery 等常被一併提及的產品，本次檢索<strong>在胸腔外科領域查無 2023 至 2026 年的臨床驗證文獻</strong>，其主要應用場域仍為腹腔鏡與泌尿科。若在論文或簡報中順帶列入，容易成為破綻。</li>
+        <li>部分 2026 年發表的研究與產業事件，本文引用時間點為 2026 年 9 月，後續可能有更新版本或後續分析。</li>
+      </ul>
+    </div>
+
+  </article>
+</div>
+</div>
+
+</body>
+</html>
