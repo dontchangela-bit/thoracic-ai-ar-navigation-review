@@ -583,6 +583,19 @@ td strong{font-weight:600}
         <div class="stat"><span class="v">1,424</span><span class="k">納入病人數<br>10 篇研究</span></div>
       </div>
 
+      <h4>統合分析看到的切緣效益，機制是什麼？</h4>
+      <p>OR 0.09 是個很漂亮的數字，但它只告訴我們結果，沒說<strong>方法</strong>。三軍總醫院團隊發表於 <a href="https://doi.org/10.1016/j.athoracsur.2021.06.091">Annals of Thoracic Surgery（2022;114:1029-34）</a>的研究提供了一個具體答案：以 Mimics 重建腫瘤、支氣管、肺動脈、肺靜脈與縱膈淋巴結後，圍繞結節規劃一個<strong>「安全球狀切緣」——以結節邊緣外推 2 公分</strong>，再依這顆球落在哪裡決定術式：落在肺外三分之一就做楔狀切除，落在內三分之二但未涉及次級支氣管與血管就做肺段切除，涉及了就做肺葉切除。</p>
+      <p>這個作法把「切緣夠不夠」從術中的臨場判斷，變成術前可以量化、可以事先確認的幾何問題。這正是統合分析所測到的切緣效益背後的操作機制。</p>
+      <p>該研究回溯 2002 年 1 月至 2018 年 6 月共 1,086 例，納入 281 例臨床分期 IA2 非小細胞肺癌（腫瘤大於 1 公分、不超過 2 公分、無淋巴結與遠端轉移），其中 99 例（35.2%）使用術前 3D 模擬、182 例未使用。復發率為 <strong>2% 對 11.5%</strong>（<em>P</em>&lt;.01），局部復發率 4.8% 對 17%。30 天死亡率 0%，整體存活率 95.4%。<span class="ev ev-c">回溯／小樣本</span></p>
+
+      <div class="caution">
+        <span class="tag">這組數字不能直接當成因果證據</span>
+        <p>這是回溯性研究，兩組在基線上差異極大，而且差異的方向會系統性地放大效果：</p>
+        <p><strong>追蹤時間差了五倍。</strong>模擬組中位追蹤 12.6 個月，未模擬組 65.9 個月（<em>P</em>&lt;.001）。追蹤越久越容易抓到復發——光是這一項就可能解釋掉大部分的差距。<strong>族群根本不同。</strong>模擬組 96% 是中央型腫瘤，未模擬組只有 26.9%。<strong>還有年代效應。</strong>3D 模擬自 2013 年才開始，未模擬組含納了 2002 年起的病例，影像品質、手術標準與追蹤方式都不同。研究本身已誠實列出這些限制，並明言需要前瞻性研究驗證。</p>
+      </div>
+
+      <p>撇開組間比較，這篇研究裡<strong>組內</strong>的發現其實更耐得住檢驗：在使用 3D 模擬的病人中，楔狀切除與解剖性切除的復發率沒有顯著差異（3.4% 對 1.4%，<em>P</em>=.516）；但在未使用模擬的病人中，兩者差異顯著（2.7% 對 13.8%，<em>P</em>=.005）。這個對比不受追蹤時間長短影響，指向一個比較站得住腳的解讀：<strong>當切緣是事先規劃出來的，術式選擇對腫瘤結果的影響就變小了</strong>——外科醫師因此有空間為病人保留更多肺實質，而不必為了保險起見一律做大。</p>
+
       <p>臨床上使用的平台包括日本的 Synapse Vincent 與 Ziosoft REVORAS、法國的 Visible Patient、美國的 IQQA-3D 與 Materialise Mimics。近兩年的研究另外證實，非顯影劑重建的 3D 模型對於顯影劑禁忌的病人是可靠的替代方案。這項技術在日本與中國已屬常規，並於 2026 年進入日本胸腔外科的<a href="https://onlinelibrary.wiley.com/doi/10.1111/ases.70196">專家共識討論</a>。<span class="ev ev-b">前瞻／多中心</span></p>
 
       <h3>ICG 螢光判定段間平面</h3>
@@ -848,9 +861,40 @@ td strong{font-weight:600}
 
       <div class="callout">
         <span class="tag">但臨床證據這一端不是空白</span>
-        <p>設備仰賴進口，不等於台灣沒有能力產出這個領域的臨床證據。<a href="https://formative.jmir.org/2026/1/e94084/">三軍總醫院胸腔外科團隊 2026 年發表於 JMIR Formative Research 的前瞻性研究</a>（Teng 等，DOI 10.2196/94084）以本土病人資料驗證 AI 擴增螢光透視術中導航，是該系統在亞洲最早的臨床應用報告之一，試驗註冊於 ClinicalTrials.gov（NCT07682012）。同一機構的 Godot 開源虛擬手術訓練平台研究（見第 03 節）則從教育端切入。</p>
+        <p>設備仰賴進口，不等於台灣沒有能力產出這個領域的臨床證據。以三軍總醫院胸腔外科為例，該團隊在這條技術鏈上已累積橫跨十餘年的成果，而且三項研究恰好對應本文第 01 節指出的三個不同缺口。</p>
         <p>這件事的策略意義值得點出：<strong>證據生產與設備製造是兩條可以分開走的路。</strong>台灣醫學中心即使短期內做不出自己的導航硬體，仍可以在臨床驗證、實作研究（implementation research）與亞洲族群外部驗證上取得話語權——而這恰好是本文第 08 節指出的、目前全球最稀缺的東西。</p>
       </div>
+
+      <div class="table-wrap">
+        <table>
+          <caption>單一機構的技術鏈：三軍總醫院胸腔外科</caption>
+          <thead>
+            <tr><th scope="col">階段</th><th scope="col">研究</th><th scope="col">設計與規模</th><th scope="col">對應的臨床缺口</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>術前規劃</strong><br><span style="color:var(--ink-3)">2022</span></td>
+              <td><a href="https://doi.org/10.1016/j.athoracsur.2021.06.091">3D 影像模擬與早期肺癌切除</a><br><span style="color:var(--ink-3)">Ann Thorac Surg</span></td>
+              <td class="num">回溯 281 例<br>2002–2018</td>
+              <td>安全切緣的事前量化<br><span style="color:var(--ink-3)">缺口：空間想像力的負擔</span></td>
+            </tr>
+            <tr>
+              <td><strong>術中導航</strong><br><span style="color:var(--ink-3)">2026</span></td>
+              <td><a href="https://formative.jmir.org/2026/1/e94084/">AI 擴增螢光透視術中定位</a><br><span style="color:var(--ink-3)">JMIR Form Res</span></td>
+              <td class="num">前瞻單臂 14 例<br>2024</td>
+              <td>摸不到的小結節定位<br><span style="color:var(--ink-3)">缺口：CT-to-body divergence</span></td>
+            </tr>
+            <tr>
+              <td><strong>訓練傳承</strong><br><span style="color:var(--ink-3)">2026</span></td>
+              <td>Godot 開源虛擬手術平台<br><span style="color:var(--ink-3)">研究進行中</span></td>
+              <td class="num">前瞻前後測 13 人<br>2026</td>
+              <td>陡峭的學習曲線<br><span style="color:var(--ink-3)">缺口：VATS 訓練機會有限</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>這條軸線本身就是一個值得參考的機構策略：<strong>不是追逐單一熱門技術，而是沿著同一個臨床問題往下走</strong>——先解決術前怎麼規劃，再解決術中怎麼找到，最後解決怎麼把能力傳下去。對正在規劃導入路徑的醫學中心來說，這比一次採購一套昂貴設備更接近可行的作法。</p>
 
       <h3>一條值得注意的共同路線</h3>
       <p>把上述兩項研究放在一起看，會發現它們共享同一個策略選擇，而且這個選擇與國際主流相反。</p>
@@ -914,6 +958,7 @@ td strong{font-weight:600}
       <h2>資料來源與使用說明</h2>
       <p>本文由四組平行文獻檢索彙整而成，涵蓋 PubMed／PMC、NEJM、JCO、CHEST、JTO、EJCTS、JTCVS Techniques、JAMA Surgery、JMIR Formative Research、Science Robotics、npj Digital Medicine、ClinicalTrials.gov、FDA 與 TFDA 公開資料，以及廠商與機構新聞稿。內文連結指向可公開取得的來源頁面。</p>
       <p>第 02、05、09 節引用之三軍總醫院導航研究全文為開放取用（CC BY 4.0）：Teng H, Huang HK, Chen YS, Lin CJ, Tsai YH, Huang TW, Lin KH. Real-Time AI-Augmented Fluoroscopic Navigation for Intraoperative Pulmonary Nodule Localization: Prospective Observational Pilot Study. <em>JMIR Form Res</em>. 2026;10:e94084. doi:10.2196/94084（2026 年 8 月 31 日刊出；ClinicalTrials.gov NCT07682012）。</p>
+      <p>第 03、09 節引用之術前 3D 模擬研究：Lin KH, Huang YJ, Lee SC, Huang HK, Chen YY, Chang H, Wu TH, Sung BY, Huang TW. Benefit of Three-dimensional Image Simulation in Surgical Resection of Early-stage Lung Cancer. <em>Ann Thorac Surg</em>. 2022;114(4):1029-1034. doi:10.1016/j.athoracsur.2021.06.091（TSGHIRB A202005013）。</p>
       <p>第 03、09 節引用之 Godot 開源虛擬手術訓練平台工作坊資料，來自三軍總醫院研究計畫（IRB A202605008、國科會 113WFE0110233，主持人黃敍愷），為<strong>尚未正式發表之內部研究資料</strong>，本文依團隊提供之結果報告撰寫。第二場工作坊與納入客觀能力評估的後續分析仍在進行，數據於正式發表前應以團隊最終版本為準。</p>
       <p>引用前請注意以下幾點：</p>
       <ul>
