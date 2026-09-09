@@ -499,6 +499,8 @@ td strong{font-weight:600}
 
       <p>術前 CT 取得於吸氣末、肺完全擴張的狀態；術中卻是單肺通氣、肺塌陷、器械擠壓。導管以為自己抵達了病灶，實際上沒有；AR 模型疊上去的血管位置，不是真正的血管位置。這個偏差不是校準不良，而是器官本身改變了形狀。</p>
 
+      <p>這個偏差有多大？文獻報告的平均值約 <strong>14.5 公釐</strong>，而 AI 擴增螢光透視導航可將實際目標位置的導航誤差壓到約 <strong>5.9 公釐</strong>（見<a href="https://formative.jmir.org/2026/1/e94084/">三軍總醫院團隊 2026 年於 JMIR Formative Research 的整理</a>）；Peek 等人在活體胸腔鏡手術中量測到的平均關鍵點偏差則為 6.6 公釐。把這些數字放在本文反覆出現的病灶尺度旁邊就看得出嚴重性——當目標結節本身只有 9 到 10 公釐，一個十幾公釐的系統性偏差<strong>足以整顆錯過</strong>。這就是為什麼它不是精度上的小瑕疵，而是決定成敗的問題。<span class="ev ev-b">前瞻／多中心</span></p>
+
       <figure>
         <div class="fig-frame">
           <svg viewBox="0 0 880 400" role="img" aria-label="示意圖：術前 CT 於肺擴張狀態規劃路徑，術中肺塌陷造成導管尖端與實際病灶位置偏離，需以術中 CBCT、斷層合成或即時形變模型重新配準">
@@ -660,10 +662,38 @@ td strong{font-weight:600}
       <p>換句話說，導航技術對病人最明確的貢獻不是提高診斷率，而是在維持相當診斷率的前提下大幅降低併發症。這在向病人或行政單位說明價值時，是比「診斷率更高」更站得住腳的論述。</p>
 
       <p>產業的整合方向也印證了這一點：Monarch QUEST 整合錐狀束電腦斷層、Noah Medical Galaxy 的 TiLT+ 斷層合成（<a href="https://www.noahmed.com/press-releases/the-galaxy-system-receives-fda-clearance-for-robotic-navigated-bronchoscopy">2023 年 FDA 清核</a>）、Body Vision LungVision 的 AI Tomo，都在補同一個洞。Intuitive Ion 則於 <a href="https://www.medtechdive.com/news/intuitive-gains-fda-clearance-for-ion-lung-catheter/548768/">2019 年取得 FDA 清核</a>。<span class="ev ev-d">產業動態</span></p>
+      <p>但這些平台的路線並不相同，而差異的重點不在誰的機械臂比較好，在於<strong>要不要求醫院先改造硬體</strong>。下一節談的就是另一條路。</p>
+
+      <h3>另一條路線：用軟體強化既有的 C-arm，而不是換掉它</h3>
+      <p>前面談的校正手段有一個共同前提——都要先有錢。機器人平台、術中 CBCT、混合手術室，每一項都是資本支出與空間改造。這對資源有限的醫院是實質的排除條件，也讓「導航技術」在很多地方變成只有醫學中心玩得起的東西。</p>
+      <p>擴增螢光透視（augmented fluoroscopy）走的是相反的路：不換硬體，改用 AI 把既有的 C-arm 變成準三維導航工具。台灣目前最完整的臨床資料來自<strong>三軍總醫院胸腔外科團隊</strong>發表於 <a href="https://formative.jmir.org/2026/1/e94084/">JMIR Formative Research（2026;10:e94084）</a>的前瞻性單臂研究，也是 LungVision 系統在亞洲最早的臨床應用報告之一。<span class="ev ev-b">前瞻／多中心</span></p>
+
+      <div class="stat-row">
+        <div class="stat"><span class="v">14 / 14</span><span class="k">器械抵達病灶確認<br>（tool-in-lesion）</span></div>
+        <div class="stat"><span class="v">9.3 <span style="font-size:15px">公釐</span></span><span class="k">平均病灶直徑<br>78.6% ≤ 10 公釐</span></div>
+        <div class="stat"><span class="v">38.6 <span style="font-size:15px">分鐘</span></span><span class="k">平均導航時間<br>含系統設定</span></div>
+        <div class="stat"><span class="v">0</span><span class="k">定位相關併發症<br>完整切除 14/14</span></div>
+      </div>
+
+      <p>值得注意的是這批病灶的條件相當嚴苛：平均直徑 9.3 公釐、78.6% 不到 1 公分、92.9% 的毛玻璃成分比例達 20% 以上、平均 CT 值 −320.1 HU、距臟層胸膜平均 12.4 公釐。這正是「看不到也摸不到」的那一類——傳統胸腔鏡最束手無策、也最需要導航的病灶。71.4% 最終病理為惡性。</p>
+      <p>技術上，系統以 60 度 C-arm 旋轉、每次 15 至 20 秒取像，重建準三維影像後與術前 CT 融合，產生擴增螢光透視疊圖與虛擬支氣管鏡路徑，確認器械在病灶內後注射 ICG 標記。整套流程<strong>接在醫院原有的 C-arm 上，不需要混合手術室或任何基礎建設改造</strong>——這是它與 Ion、Monarch 路線最根本的差異。</p>
+
+      <div class="caution">
+        <span class="tag">這篇研究自己講清楚的限制</span>
+        <p>單中心、14 例、單臂設計。更關鍵的是<strong>所有病人都接受了雙重定位</strong>：術前先以 CT 導引或 Archimedes 虛擬支氣管鏡標記，術中再用 LungVision 確認。這是為了病人安全而刻意保留的後備，但也意味著最終的手術成果<strong>無法單獨歸因於 LungVision</strong>，缺少單一模態對照組。此外，毫米級的幾何精度未前瞻收集，只能以流程終點（tool-in-lesion）評估；研究也未設計來描述學習曲線。</p>
+        <p>還有一個對台灣特別重要的外推限制：IRB 核准的年齡上限為 65 歲，收案的 20 人中有 6 人因超齡被排除。<strong>而高齡者正是肺癌篩檢族群的主力</strong>，因此這批結果不能直接外推到他們身上。</p>
+      </div>
+
+      <p>把限制講完之後，這篇研究真正的貢獻反而更清楚：它不是宣稱 LungVision 優於機器人平台，而是證明<strong>在沒有混合手術室、沒有機器人的醫院，仍然可以做到即時術中導航定位</strong>。對照先前 CT 導引鉤針定位統合分析報告的氣胸率 35%、標記脫落率 2.4% 至 13%，這條路線的安全性訊號值得後續更大規模的對照研究檢驗。研究採用的是「human-in-the-loop」設計——AI 提供疊圖與路徑建議，關鍵判斷（手動確認病灶位置、最終器械確認）仍由術者保留，這與第 08 節談的責任歸屬框架一致。</p>
 
       <h3>術中定位方法的選擇</h3>
       <p>對外科端而言，導航的另一個用途是術前或術中把摸不到的病灶標記出來。經皮鉤針與微線圈（microcoil）的比較顯示，兩者氣胸率相近（約 34.8% 對 34.9%），但微線圈移位率更低、疼痛與肺出血發生率顯著較低（13% 對 46.5%）（<a href="https://link.springer.com/article/10.1007/s00330-018-5939-4">European Radiology</a>）。<span class="ev ev-a">統合分析／RCT</span></p>
       <p>日本發展的 <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10093148/">VAL-MAP（虛擬輔助肺定位技術）</a>以術前支氣管鏡進行多點染料標記，已納入日本健保並累積十年成果。混合手術室中則常以電磁導航或機器人支氣管鏡導引注射<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9274119/">三重染料</a>（ICG、亞甲藍、含碘顯影劑），文獻報告導航成功率 100%、定位成功率約 80%，且因定位與手術在同一次麻醉下完成，優於分兩次進行的經皮定位。<span class="ev ev-c">回溯／小樣本</span></p>
+
+      <div class="callout">
+        <span class="tag">單一模態定位為什麼不夠</span>
+        <p><a href="https://bmjopen.bmj.com/content/9/9/e028018">VAL-MAP 2.0 多中心試驗</a>提供了一個很有說服力的數字：僅依表面染料標記所畫出的暫定釘合線，在<strong>看到深部標記之後有 50% 的病例需要修改</strong>。換句話說，表面標記無法可靠地指出切除深度——這正是深埋於肺實質內的結節最危險的地方。這個發現支持多模態策略：以術前標記提供表面定位，再以術中即時影像確認器械確實位於病灶內。</p>
+      </div>
 
       <p>導航技術近年也從診斷延伸為治療載體：<a href="https://ctv.veeva.com/study/power-study-prospective-transbronchial-microwave-robotic-assisted-bronchoscopy">POWER 研究</a>結合 Monarch 機器人平台、NEUWAVE 微波消融與 CBCT 確認，處理肺部寡轉移病灶，是「診斷即治療」路線的代表。<span class="ev ev-c">回溯／小樣本</span></p>
 
@@ -713,6 +743,8 @@ td strong{font-weight:600}
             <div class="lad-row"><div class="lad-name">3D 列印輔助規劃與教學</div><div class="lad-track t3" role="img" aria-label="證據等級 3，隨機對照試驗"><span class="on"></span><span class="on"></span><span class="on"></span><span></span></div><div class="lad-note">小型 RCT 與準隨機試驗</div></div>
 
             <div class="lad-row"><div class="lad-name">AI 肺結節偵測與風險預測</div><div class="lad-track t2" role="img" aria-label="證據等級 2，前瞻或多中心世代研究"><span class="on"></span><span class="on"></span><span></span><span></span></div><div class="lad-note">大型外部驗證，無臨床結果 RCT</div></div>
+
+            <div class="lad-row"><div class="lad-name">AI 擴增螢光透視術中定位</div><div class="lad-track t2" role="img" aria-label="證據等級 2，前瞻或多中心世代研究"><span class="on"></span><span class="on"></span><span></span><span></span></div><div class="lad-note">前瞻單臂 14 例（三總），無對照組</div></div>
 
             <div class="lad-row"><div class="lad-name">術後預測模型與穿戴監測</div><div class="lad-track t2" role="img" aria-label="證據等級 2，前瞻或多中心世代研究"><span class="on"></span><span class="on"></span><span></span><span></span></div><div class="lad-note">多中心世代研究</div></div>
 
@@ -799,7 +831,13 @@ td strong{font-weight:600}
       <p>對照之下，中國已於 2026 年將機器人手術獨立納入 DRG／DIP 分組定價。台灣若持續以現行 DRG 打包模式處理高單價導航與機器人手術，導入誘因將持續受抑。<span class="ev ev-d">產業動態</span></p>
 
       <h3>導航設備完全仰賴進口</h3>
-      <p>台灣本土手術導航新創集中在<strong>神經外科</strong>——鈦隼生物科技的 NaoTrac 已於 2025 年取得美國 FDA 510(k)，並持有 TFDA 與歐盟 CE 認證（<a href="https://www.sgs.com.tw/news-media-resources-content/page?id=1783">相關報導</a>）。但胸腔外科導航仍完全仰賴 Medtronic superDimension、Intuitive Ion 等進口設備，本土供應鏈與臨床證據皆屬空白。<span class="ev ev-d">產業動態</span></p>
+      <p>台灣本土手術導航新創集中在<strong>神經外科</strong>——鈦隼生物科技的 NaoTrac 已於 2025 年取得美國 FDA 510(k)，並持有 TFDA 與歐盟 CE 認證（<a href="https://www.sgs.com.tw/news-media-resources-content/page?id=1783">相關報導</a>）。胸腔外科導航的<strong>設備端</strong>則仍仰賴 Medtronic superDimension、Intuitive Ion、Body Vision LungVision 等進口平台，本土供應鏈屬空白。<span class="ev ev-d">產業動態</span></p>
+
+      <div class="callout">
+        <span class="tag">但臨床證據這一端不是空白</span>
+        <p>設備仰賴進口，不等於台灣沒有能力產出這個領域的臨床證據。<a href="https://formative.jmir.org/2026/1/e94084/">三軍總醫院胸腔外科團隊 2026 年發表於 JMIR Formative Research 的前瞻性研究</a>（Teng 等，DOI 10.2196/94084）以本土病人資料驗證 AI 擴增螢光透視術中導航，是該系統在亞洲最早的臨床應用報告之一，試驗註冊於 ClinicalTrials.gov（NCT07682012）。</p>
+        <p>這件事的策略意義值得點出：<strong>證據生產與設備製造是兩條可以分開走的路。</strong>台灣醫學中心即使短期內做不出自己的導航硬體，仍可以在臨床驗證、實作研究（implementation research）與亞洲族群外部驗證上取得話語權——而這恰好是本文第 08 節指出的、目前全球最稀缺的東西。</p>
+      </div>
       <p>可及性方面，電磁導航與機器人支氣管鏡在台多屬自費項目（以亞東紀念醫院為例，「支氣管鏡導航 3D 立體定位術」自費 20,000 元，核定於 2025 年 1 月）。<span class="ev ev-c">回溯／小樣本</span></p>
 
       <h3>導入的實務順序</h3>
@@ -824,7 +862,8 @@ td strong{font-weight:600}
 
     <div class="endnote">
       <h2>資料來源與使用說明</h2>
-      <p>本文由四組平行文獻檢索彙整而成，涵蓋 PubMed／PMC、NEJM、JCO、CHEST、JTO、EJCTS、JTCVS Techniques、JAMA Surgery、Science Robotics、npj Digital Medicine、ClinicalTrials.gov、FDA 與 TFDA 公開資料，以及廠商與機構新聞稿。內文連結指向可公開取得的來源頁面。</p>
+      <p>本文由四組平行文獻檢索彙整而成，涵蓋 PubMed／PMC、NEJM、JCO、CHEST、JTO、EJCTS、JTCVS Techniques、JAMA Surgery、JMIR Formative Research、Science Robotics、npj Digital Medicine、ClinicalTrials.gov、FDA 與 TFDA 公開資料，以及廠商與機構新聞稿。內文連結指向可公開取得的來源頁面。</p>
+      <p>第 02、05、09 節引用之三軍總醫院研究全文為開放取用（CC BY 4.0）：Teng H, Huang HK, Chen YS, Lin CJ, Tsai YH, Huang TW, Lin KH. Real-Time AI-Augmented Fluoroscopic Navigation for Intraoperative Pulmonary Nodule Localization: Prospective Observational Pilot Study. <em>JMIR Form Res</em>. 2026;10:e94084. doi:10.2196/94084（2026 年 8 月 31 日刊出；ClinicalTrials.gov NCT07682012）。</p>
       <p>引用前請注意以下幾點：</p>
       <ul>
         <li>標示<span class="ev ev-d">產業動態</span>的內容來自新聞稿、預印本或媒體報導，可信度低於同儕審查文獻，寫入正式文件前應另行查證原始資料。</li>
