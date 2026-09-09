@@ -594,6 +594,17 @@ td strong{font-weight:600}
 
       <h3>VR 訓練與 3D 列印教學</h3>
       <p>VATS 肺葉切除的 VR 模擬器已建立完整的信效度證據：以 VATSAT 工具對 41 位受試者進行 123 例模擬手術評分，內部一致性信度 0.94、評分者間信度 0.85、重測信度 0.90，可有效區分新手與資深術者（<a href="https://pubmed.ncbi.nlm.nih.gov/30225606/">相關驗證研究</a>）。3D 列印模型則已有<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11168317/">小型隨機試驗</a>顯示：對資深術者而言與數位 3D 重建效果相當，但對資淺醫師理解複雜解剖具額外教育價值。<span class="ev ev-a">統合分析／RCT</span></p>
+
+      <h4>開源引擎能不能取代昂貴的商用模擬器？</h4>
+      <p>VR 訓練最大的落地障礙不是效果，而是價格：商用 VATS 模擬器昂貴，且無法針對特定病人的解剖做客製化。三軍總醫院團隊（主持人黃敍愷，IRB A202605008、國科會 113WFE0110233）因此嘗試以<strong>開源的 Godot 遊戲引擎</strong>自建雙平台訓練系統——沉浸式模擬搭配網頁版檢視器，將病人 CT 經 3D Slicer 轉為三維模型，提供肺葉、分色血管、支氣管、腫瘤、淋巴結與骨架的分層顯示，以及肺葉切除規劃的虛擬切除工具。</p>
+      <p>2026 年 6 月的首場工作坊收案 13 人（8 名胸腔外科住院醫師、5 名實習醫學生，全部無 VR 模擬經驗），90 分鐘訓練前後自評：整體手術自我效能由 2.95 升至 3.97（+1.02，<em>t</em>(12)=6.80，<em>p</em>&lt;0.001，Cohen's <em>dz</em>=1.89），<strong>13 人全數進步、無人退步</strong>。六個能力構面全部顯著改善，而<strong>增幅最大的兩項恰好是基線分數最低的兩項</strong>——虛擬平台操作（+1.56）與手術步驟認知（+1.09）。<span class="ev ev-b">前瞻／多中心</span></p>
+      <p>認知負荷的數據特別值得看：平台的外在認知負荷（extraneous load）為 2.10，明顯低於傳統教學的 3.56，而增生認知負荷（germane load）達 4.23。換句話說，分層式的病人專屬三維視覺化<strong>並沒有增加學習者的負擔，反而把認知資源導向理解本身</strong>，這與認知負荷理論的預測一致。系統可用性量表（SUS）平均 71.0，高於業界基準 68。住院醫師與實習醫學生的進步幅度沒有顯著差異（<em>p</em>=0.62），顯示平台對兩個訓練階段同樣有效。</p>
+
+      <div class="caution">
+        <span class="tag">這裡要非常小心區分兩種證據</span>
+        <p>前段 VATSAT 的信效度資料衡量的是<strong>客觀術式能力</strong>；而這場工作坊的主要結果是<strong>自評的自我效能</strong>，兩者不能混為一談。自我效能上升不等於實際技術變好——單組前後測設計、13 人便利取樣、無對照組，且缺乏轉移至真實手術室的成效資料。</p>
+        <p>研究團隊自己也是這樣定位的：全文用語維持「improvement trend」而不宣稱療效，並已規劃第二場工作坊與納入 VATSAT 客觀評估、轉移成效的後續研究。這是正確的分寸。</p>
+      </div>
     </section>
 
     <!-- ============ 4 ============ -->
@@ -738,7 +749,9 @@ td strong{font-weight:600}
 
             <div class="lad-row"><div class="lad-name">導航支氣管鏡（ENB／機器人）</div><div class="lad-track t3" role="img" aria-label="證據等級 3，隨機對照試驗"><span class="on"></span><span class="on"></span><span class="on"></span><span></span></div><div class="lad-note">RELIANT RCT，411 例</div></div>
 
-            <div class="lad-row"><div class="lad-name">VR 訓練與能力評估</div><div class="lad-track t3" role="img" aria-label="證據等級 3，隨機對照試驗"><span class="on"></span><span class="on"></span><span class="on"></span><span></span></div><div class="lad-note">信效度驗證研究</div></div>
+            <div class="lad-row"><div class="lad-name">VR 能力評估工具（VATSAT）</div><div class="lad-track t3" role="img" aria-label="證據等級 3，隨機對照試驗"><span class="on"></span><span class="on"></span><span class="on"></span><span></span></div><div class="lad-note">信效度驗證研究，客觀評分</div></div>
+
+            <div class="lad-row"><div class="lad-name">開源 VR 平台訓練成效</div><div class="lad-track t2" role="img" aria-label="證據等級 2，前瞻或多中心世代研究"><span class="on"></span><span class="on"></span><span></span><span></span></div><div class="lad-note">前瞻前後測 13 人（三總），自評結果</div></div>
 
             <div class="lad-row"><div class="lad-name">3D 列印輔助規劃與教學</div><div class="lad-track t3" role="img" aria-label="證據等級 3，隨機對照試驗"><span class="on"></span><span class="on"></span><span class="on"></span><span></span></div><div class="lad-note">小型 RCT 與準隨機試驗</div></div>
 
@@ -835,9 +848,46 @@ td strong{font-weight:600}
 
       <div class="callout">
         <span class="tag">但臨床證據這一端不是空白</span>
-        <p>設備仰賴進口，不等於台灣沒有能力產出這個領域的臨床證據。<a href="https://formative.jmir.org/2026/1/e94084/">三軍總醫院胸腔外科團隊 2026 年發表於 JMIR Formative Research 的前瞻性研究</a>（Teng 等，DOI 10.2196/94084）以本土病人資料驗證 AI 擴增螢光透視術中導航，是該系統在亞洲最早的臨床應用報告之一，試驗註冊於 ClinicalTrials.gov（NCT07682012）。</p>
+        <p>設備仰賴進口，不等於台灣沒有能力產出這個領域的臨床證據。<a href="https://formative.jmir.org/2026/1/e94084/">三軍總醫院胸腔外科團隊 2026 年發表於 JMIR Formative Research 的前瞻性研究</a>（Teng 等，DOI 10.2196/94084）以本土病人資料驗證 AI 擴增螢光透視術中導航，是該系統在亞洲最早的臨床應用報告之一，試驗註冊於 ClinicalTrials.gov（NCT07682012）。同一機構的 Godot 開源虛擬手術訓練平台研究（見第 03 節）則從教育端切入。</p>
         <p>這件事的策略意義值得點出：<strong>證據生產與設備製造是兩條可以分開走的路。</strong>台灣醫學中心即使短期內做不出自己的導航硬體，仍可以在臨床驗證、實作研究（implementation research）與亞洲族群外部驗證上取得話語權——而這恰好是本文第 08 節指出的、目前全球最稀缺的東西。</p>
       </div>
+
+      <h3>一條值得注意的共同路線</h3>
+      <p>把上述兩項研究放在一起看，會發現它們共享同一個策略選擇，而且這個選擇與國際主流相反。</p>
+
+      <div class="table-wrap">
+        <table>
+          <caption>兩種導入路線的對照</caption>
+          <thead>
+            <tr><th scope="col"></th><th scope="col">資本密集路線</th><th scope="col">軟體優先路線</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>術中導航</strong></td>
+              <td>機器人支氣管鏡＋混合手術室<br><span style="color:var(--ink-3)">Ion、Monarch、術中 CBCT</span></td>
+              <td>AI 擴增螢光透視接上既有 C-arm<br><span style="color:var(--ink-3)">LungVision，不需改造基礎建設</span></td>
+            </tr>
+            <tr>
+              <td><strong>手術訓練</strong></td>
+              <td>商用 VR 模擬器<br><span style="color:var(--ink-3)">高單價、無法客製病人解剖</span></td>
+              <td>開源遊戲引擎自建平台<br><span style="color:var(--ink-3)">Godot＋3D Slicer，病人專屬模型</span></td>
+            </tr>
+            <tr>
+              <td><strong>門檻</strong></td>
+              <td>資本支出、空間改造、學習曲線</td>
+              <td>軟體整合能力、跨團隊協調</td>
+            </tr>
+            <tr>
+              <td><strong>可擴散性</strong></td>
+              <td>限醫學中心</td>
+              <td>可向區域醫院與資源有限地區延伸</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>這不只是省錢的權宜之計。在健保給付缺口短期內難以填補的現實下，<strong>軟體優先路線是少數能讓新技術實際跨過導入門檻的作法</strong>，而且它同時打開了另一個機會：如果台灣做不出導航硬體，卻能在「如何用既有設備做到同樣的事」這件事上累積證據，那反而是亞太地區其他資源類似的醫療體系最需要的知識。這正是實作研究（implementation research）的價值所在，也比追趕硬體規格更務實。</p>
+      <p>但要誠實說：這兩項研究目前都是<strong>單中心、小樣本、無對照組</strong>的早期成果，支持的是「可行」而非「更好」。要讓這條路線成為政策論述，還需要多中心驗證與成本效益分析。</p>
       <p>可及性方面，電磁導航與機器人支氣管鏡在台多屬自費項目（以亞東紀念醫院為例，「支氣管鏡導航 3D 立體定位術」自費 20,000 元，核定於 2025 年 1 月）。<span class="ev ev-c">回溯／小樣本</span></p>
 
       <h3>導入的實務順序</h3>
@@ -863,7 +913,8 @@ td strong{font-weight:600}
     <div class="endnote">
       <h2>資料來源與使用說明</h2>
       <p>本文由四組平行文獻檢索彙整而成，涵蓋 PubMed／PMC、NEJM、JCO、CHEST、JTO、EJCTS、JTCVS Techniques、JAMA Surgery、JMIR Formative Research、Science Robotics、npj Digital Medicine、ClinicalTrials.gov、FDA 與 TFDA 公開資料，以及廠商與機構新聞稿。內文連結指向可公開取得的來源頁面。</p>
-      <p>第 02、05、09 節引用之三軍總醫院研究全文為開放取用（CC BY 4.0）：Teng H, Huang HK, Chen YS, Lin CJ, Tsai YH, Huang TW, Lin KH. Real-Time AI-Augmented Fluoroscopic Navigation for Intraoperative Pulmonary Nodule Localization: Prospective Observational Pilot Study. <em>JMIR Form Res</em>. 2026;10:e94084. doi:10.2196/94084（2026 年 8 月 31 日刊出；ClinicalTrials.gov NCT07682012）。</p>
+      <p>第 02、05、09 節引用之三軍總醫院導航研究全文為開放取用（CC BY 4.0）：Teng H, Huang HK, Chen YS, Lin CJ, Tsai YH, Huang TW, Lin KH. Real-Time AI-Augmented Fluoroscopic Navigation for Intraoperative Pulmonary Nodule Localization: Prospective Observational Pilot Study. <em>JMIR Form Res</em>. 2026;10:e94084. doi:10.2196/94084（2026 年 8 月 31 日刊出；ClinicalTrials.gov NCT07682012）。</p>
+      <p>第 03、09 節引用之 Godot 開源虛擬手術訓練平台工作坊資料，來自三軍總醫院研究計畫（IRB A202605008、國科會 113WFE0110233，主持人黃敍愷），為<strong>尚未正式發表之內部研究資料</strong>，本文依團隊提供之結果報告撰寫。第二場工作坊與納入客觀能力評估的後續分析仍在進行，數據於正式發表前應以團隊最終版本為準。</p>
       <p>引用前請注意以下幾點：</p>
       <ul>
         <li>標示<span class="ev ev-d">產業動態</span>的內容來自新聞稿、預印本或媒體報導，可信度低於同儕審查文獻，寫入正式文件前應另行查證原始資料。</li>
