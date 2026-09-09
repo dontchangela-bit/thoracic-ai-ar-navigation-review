@@ -18,6 +18,7 @@ img{max-width:100%}
   h2.sec{break-after:avoid}
   figure,table{break-inside:avoid}
   a{color:#000 !important;text-decoration:underline}
+  .tsgh{border-color:#000 !important;color:#000 !important;background:transparent !important}
 }
 </style>
 <title>AI、AR 與胸腔外科導航</title>
@@ -46,6 +47,9 @@ img{max-width:100%}
   --ev-c-bg:#F1E8D5;
   --ev-d-bg:#F3E1DE;
   --track-off:#DFE7EA;
+  --tsgh:#7A3E8C;
+  --tsgh-bg:#F0E5F4;
+  --tsgh-line:#C9A8D6;
   --shadow:0 1px 2px rgba(20,33,42,.05),0 10px 28px -20px rgba(20,33,42,.35);
   --serif:"Noto Serif TC",Georgia,"Times New Roman",serif;
   --sans:"IBM Plex Sans","Noto Sans TC","Helvetica Neue",Arial,sans-serif;
@@ -71,6 +75,9 @@ img{max-width:100%}
     --ev-c-bg:#302710;
     --ev-d-bg:#331B17;
     --track-off:#243039;
+    --tsgh:#C39BD8;
+    --tsgh-bg:#2E1F38;
+    --tsgh-line:#5B3E6C;
     --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -20px rgba(0,0,0,.85);
   }
 }
@@ -94,6 +101,9 @@ img{max-width:100%}
   --ev-c-bg:#302710;
   --ev-d-bg:#331B17;
   --track-off:#243039;
+  --tsgh:#C39BD8;
+  --tsgh-bg:#2E1F38;
+  --tsgh-line:#5B3E6C;
   --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -20px rgba(0,0,0,.85);
 }
 
@@ -242,6 +252,30 @@ ul.body-list li::before{content:"";position:absolute;left:2px;top:.72em;width:6p
 .ev-b{color:var(--ev-b);background:var(--ev-b-bg)}
 .ev-c{color:var(--ev-c);background:var(--ev-c-bg)}
 .ev-d{color:var(--ev-d);background:var(--ev-d-bg)}
+
+/* institutional provenance marker — a different dimension from the evidence scale */
+.tsgh{
+  font-family:var(--sans);
+  font-size:11.5px;
+  font-weight:600;
+  letter-spacing:.02em;
+  padding:1px 8px;
+  border-radius:3px;
+  white-space:nowrap;
+  display:inline-block;
+  vertical-align:.09em;
+  line-height:1.6;
+  color:var(--tsgh);
+  background:var(--tsgh-bg);
+  border:1px solid var(--tsgh-line);
+}
+.tsgh::before{content:"C6";margin-right:5px;font-size:9px;vertical-align:.08em}
+h3 .tsgh,h4 .tsgh{margin-left:10px;vertical-align:.18em}
+.callout.tsgh-box{border-left-color:var(--tsgh)}
+.callout.tsgh-box .tag{color:var(--tsgh)}
+.tsgh-table{border-color:var(--tsgh-line) !important}
+.tsgh-table caption{color:var(--tsgh)}
+.lad-row .tsgh-dot{color:var(--tsgh);font-size:9px;margin-right:5px;vertical-align:.1em}
 
 .legend{
   background:var(--surface);
@@ -466,6 +500,12 @@ td strong{font-weight:600}
         <div class="legend-item"><span class="ev ev-c">回溯／小樣本</span><span>回溯性、單中心或案例系列</span></div>
         <div class="legend-item"><span class="ev ev-d">產業動態</span><span>新聞稿、預印本或媒體報導，引用前須另行查證</span></div>
       </div>
+      <div style="margin-top:18px;padding-top:16px;border-top:1px solid var(--rule-soft)">
+        <div class="legend-item" style="flex-direction:row;align-items:baseline;gap:12px;flex-wrap:wrap">
+          <span class="tsgh">三總團隊</span>
+          <span>三軍總醫院胸腔外科自身的研究成果。此標記代表<strong>研究來源</strong>，與上方的證據等級是兩個獨立的維度——標記為三總的研究同樣依其實際設計標示證據等級，未因來源而上調。</span>
+        </div>
+      </div>
     </div>
 
     <!-- ============ 1 ============ -->
@@ -499,7 +539,7 @@ td strong{font-weight:600}
 
       <p>術前 CT 取得於吸氣末、肺完全擴張的狀態；術中卻是單肺通氣、肺塌陷、器械擠壓。導管以為自己抵達了病灶，實際上沒有；AR 模型疊上去的血管位置，不是真正的血管位置。這個偏差不是校準不良，而是器官本身改變了形狀。</p>
 
-      <p>這個偏差有多大？文獻報告的平均值約 <strong>14.5 公釐</strong>，而 AI 擴增螢光透視導航可將實際目標位置的導航誤差壓到約 <strong>5.9 公釐</strong>（見<a href="https://formative.jmir.org/2026/1/e94084/">三軍總醫院團隊 2026 年於 JMIR Formative Research 的整理</a>）；Peek 等人在活體胸腔鏡手術中量測到的平均關鍵點偏差則為 6.6 公釐。把這些數字放在本文反覆出現的病灶尺度旁邊就看得出嚴重性——當目標結節本身只有 9 到 10 公釐，一個十幾公釐的系統性偏差<strong>足以整顆錯過</strong>。這就是為什麼它不是精度上的小瑕疵，而是決定成敗的問題。<span class="ev ev-b">前瞻／多中心</span></p>
+      <p>這個偏差有多大？文獻報告的平均值約 <strong>14.5 公釐</strong>，而 AI 擴增螢光透視導航可將實際目標位置的導航誤差壓到約 <strong>5.9 公釐</strong>（見<a href="https://formative.jmir.org/2026/1/e94084/">三軍總醫院團隊 2026 年於 JMIR Formative Research 的整理</a><span class="tsgh">三總團隊</span>）；Peek 等人在活體胸腔鏡手術中量測到的平均關鍵點偏差則為 6.6 公釐。把這些數字放在本文反覆出現的病灶尺度旁邊就看得出嚴重性——當目標結節本身只有 9 到 10 公釐，一個十幾公釐的系統性偏差<strong>足以整顆錯過</strong>。這就是為什麼它不是精度上的小瑕疵，而是決定成敗的問題。<span class="ev ev-b">前瞻／多中心</span></p>
 
       <figure>
         <div class="fig-frame">
@@ -583,13 +623,13 @@ td strong{font-weight:600}
         <div class="stat"><span class="v">1,424</span><span class="k">納入病人數<br>10 篇研究</span></div>
       </div>
 
-      <h4>統合分析看到的切緣效益，機制是什麼？</h4>
+      <h4>統合分析看到的切緣效益，機制是什麼？<span class="tsgh">三總團隊</span></h4>
       <p>OR 0.09 是個很漂亮的數字，但它只告訴我們結果，沒說<strong>方法</strong>。三軍總醫院團隊發表於 <a href="https://doi.org/10.1016/j.athoracsur.2021.06.091">Annals of Thoracic Surgery（2022;114:1029-34）</a>的研究提供了一個具體答案：以 Mimics 重建腫瘤、支氣管、肺動脈、肺靜脈與縱膈淋巴結後，圍繞結節規劃一個<strong>「安全球狀切緣」——以結節邊緣外推 2 公分</strong>，再依這顆球落在哪裡決定術式：落在肺外三分之一就做楔狀切除，落在內三分之二但未涉及次級支氣管與血管就做肺段切除，涉及了就做肺葉切除。</p>
       <p>這個作法把「切緣夠不夠」從術中的臨場判斷，變成術前可以量化、可以事先確認的幾何問題。這正是統合分析所測到的切緣效益背後的操作機制。</p>
       <p>該研究回溯 2002 年 1 月至 2018 年 6 月共 1,086 例，納入 281 例臨床分期 IA2 非小細胞肺癌（腫瘤大於 1 公分、不超過 2 公分、無淋巴結與遠端轉移），其中 99 例（35.2%）使用術前 3D 模擬、182 例未使用。復發率為 <strong>2% 對 11.5%</strong>（<em>P</em>&lt;.01），局部復發率 4.8% 對 17%。30 天死亡率 0%，整體存活率 95.4%。<span class="ev ev-c">回溯／小樣本</span></p>
 
-      <div class="caution">
-        <span class="tag">這組數字不能直接當成因果證據</span>
+      <div class="caution" style="border-color:var(--tsgh-line);background:var(--tsgh-bg)">
+        <span class="tag" style="color:var(--tsgh)">這組數字不能直接當成因果證據</span>
         <p>這是回溯性研究，兩組在基線上差異極大，而且差異的方向會系統性地放大效果：</p>
         <p><strong>追蹤時間差了五倍。</strong>模擬組中位追蹤 12.6 個月，未模擬組 65.9 個月（<em>P</em>&lt;.001）。追蹤越久越容易抓到復發——光是這一項就可能解釋掉大部分的差距。<strong>族群根本不同。</strong>模擬組 96% 是中央型腫瘤，未模擬組只有 26.9%。<strong>還有年代效應。</strong>3D 模擬自 2013 年才開始，未模擬組含納了 2002 年起的病例，影像品質、手術標準與追蹤方式都不同。研究本身已誠實列出這些限制，並明言需要前瞻性研究驗證。</p>
       </div>
@@ -608,13 +648,13 @@ td strong{font-weight:600}
       <h3>VR 訓練與 3D 列印教學</h3>
       <p>VATS 肺葉切除的 VR 模擬器已建立完整的信效度證據：以 VATSAT 工具對 41 位受試者進行 123 例模擬手術評分，內部一致性信度 0.94、評分者間信度 0.85、重測信度 0.90，可有效區分新手與資深術者（<a href="https://pubmed.ncbi.nlm.nih.gov/30225606/">相關驗證研究</a>）。3D 列印模型則已有<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11168317/">小型隨機試驗</a>顯示：對資深術者而言與數位 3D 重建效果相當，但對資淺醫師理解複雜解剖具額外教育價值。<span class="ev ev-a">統合分析／RCT</span></p>
 
-      <h4>開源引擎能不能取代昂貴的商用模擬器？</h4>
+      <h4>開源引擎能不能取代昂貴的商用模擬器？<span class="tsgh">三總團隊</span></h4>
       <p>VR 訓練最大的落地障礙不是效果，而是價格：商用 VATS 模擬器昂貴，且無法針對特定病人的解剖做客製化。三軍總醫院團隊（主持人黃敍愷，IRB A202605008、國科會 113WFE0110233）因此嘗試以<strong>開源的 Godot 遊戲引擎</strong>自建雙平台訓練系統——沉浸式模擬搭配網頁版檢視器，將病人 CT 經 3D Slicer 轉為三維模型，提供肺葉、分色血管、支氣管、腫瘤、淋巴結與骨架的分層顯示，以及肺葉切除規劃的虛擬切除工具。</p>
       <p>2026 年 6 月的首場工作坊收案 13 人（8 名胸腔外科住院醫師、5 名實習醫學生，全部無 VR 模擬經驗），90 分鐘訓練前後自評：整體手術自我效能由 2.95 升至 3.97（+1.02，<em>t</em>(12)=6.80，<em>p</em>&lt;0.001，Cohen's <em>dz</em>=1.89），<strong>13 人全數進步、無人退步</strong>。六個能力構面全部顯著改善，而<strong>增幅最大的兩項恰好是基線分數最低的兩項</strong>——虛擬平台操作（+1.56）與手術步驟認知（+1.09）。<span class="ev ev-b">前瞻／多中心</span></p>
       <p>認知負荷的數據特別值得看：平台的外在認知負荷（extraneous load）為 2.10，明顯低於傳統教學的 3.56，而增生認知負荷（germane load）達 4.23。換句話說，分層式的病人專屬三維視覺化<strong>並沒有增加學習者的負擔，反而把認知資源導向理解本身</strong>，這與認知負荷理論的預測一致。系統可用性量表（SUS）平均 71.0，高於業界基準 68。住院醫師與實習醫學生的進步幅度沒有顯著差異（<em>p</em>=0.62），顯示平台對兩個訓練階段同樣有效。</p>
 
-      <div class="caution">
-        <span class="tag">這裡要非常小心區分兩種證據</span>
+      <div class="caution" style="border-color:var(--tsgh-line);background:var(--tsgh-bg)">
+        <span class="tag" style="color:var(--tsgh)">這裡要非常小心區分兩種證據</span>
         <p>前段 VATSAT 的信效度資料衡量的是<strong>客觀術式能力</strong>；而這場工作坊的主要結果是<strong>自評的自我效能</strong>，兩者不能混為一談。自我效能上升不等於實際技術變好——單組前後測設計、13 人便利取樣、無對照組，且缺乏轉移至真實手術室的成效資料。</p>
         <p>研究團隊自己也是這樣定位的：全文用語維持「improvement trend」而不宣稱療效，並已規劃第二場工作坊與納入 VATSAT 客觀評估、轉移成效的後續研究。這是正確的分寸。</p>
       </div>
@@ -688,7 +728,7 @@ td strong{font-weight:600}
       <p>產業的整合方向也印證了這一點：Monarch QUEST 整合錐狀束電腦斷層、Noah Medical Galaxy 的 TiLT+ 斷層合成（<a href="https://www.noahmed.com/press-releases/the-galaxy-system-receives-fda-clearance-for-robotic-navigated-bronchoscopy">2023 年 FDA 清核</a>）、Body Vision LungVision 的 AI Tomo，都在補同一個洞。Intuitive Ion 則於 <a href="https://www.medtechdive.com/news/intuitive-gains-fda-clearance-for-ion-lung-catheter/548768/">2019 年取得 FDA 清核</a>。<span class="ev ev-d">產業動態</span></p>
       <p>但這些平台的路線並不相同，而差異的重點不在誰的機械臂比較好，在於<strong>要不要求醫院先改造硬體</strong>。下一節談的就是另一條路。</p>
 
-      <h3>另一條路線：用軟體強化既有的 C-arm，而不是換掉它</h3>
+      <h3>另一條路線：用軟體強化既有的 C-arm，而不是換掉它<span class="tsgh">三總團隊</span></h3>
       <p>前面談的校正手段有一個共同前提——都要先有錢。機器人平台、術中 CBCT、混合手術室，每一項都是資本支出與空間改造。這對資源有限的醫院是實質的排除條件，也讓「導航技術」在很多地方變成只有醫學中心玩得起的東西。</p>
       <p>擴增螢光透視（augmented fluoroscopy）走的是相反的路：不換硬體，改用 AI 把既有的 C-arm 變成準三維導航工具。台灣目前最完整的臨床資料來自<strong>三軍總醫院胸腔外科團隊</strong>發表於 <a href="https://formative.jmir.org/2026/1/e94084/">JMIR Formative Research（2026;10:e94084）</a>的前瞻性單臂研究，也是 LungVision 系統在亞洲最早的臨床應用報告之一。<span class="ev ev-b">前瞻／多中心</span></p>
 
@@ -702,8 +742,8 @@ td strong{font-weight:600}
       <p>值得注意的是這批病灶的條件相當嚴苛：平均直徑 9.3 公釐、78.6% 不到 1 公分、92.9% 的毛玻璃成分比例達 20% 以上、平均 CT 值 −320.1 HU、距臟層胸膜平均 12.4 公釐。這正是「看不到也摸不到」的那一類——傳統胸腔鏡最束手無策、也最需要導航的病灶。71.4% 最終病理為惡性。</p>
       <p>技術上，系統以 60 度 C-arm 旋轉、每次 15 至 20 秒取像，重建準三維影像後與術前 CT 融合，產生擴增螢光透視疊圖與虛擬支氣管鏡路徑，確認器械在病灶內後注射 ICG 標記。整套流程<strong>接在醫院原有的 C-arm 上，不需要混合手術室或任何基礎建設改造</strong>——這是它與 Ion、Monarch 路線最根本的差異。</p>
 
-      <div class="caution">
-        <span class="tag">這篇研究自己講清楚的限制</span>
+      <div class="caution" style="border-color:var(--tsgh-line);background:var(--tsgh-bg)">
+        <span class="tag" style="color:var(--tsgh)">這篇研究自己講清楚的限制</span>
         <p>單中心、14 例、單臂設計。更關鍵的是<strong>所有病人都接受了雙重定位</strong>：術前先以 CT 導引或 Archimedes 虛擬支氣管鏡標記，術中再用 LungVision 確認。這是為了病人安全而刻意保留的後備，但也意味著最終的手術成果<strong>無法單獨歸因於 LungVision</strong>，缺少單一模態對照組。此外，毫米級的幾何精度未前瞻收集，只能以流程終點（tool-in-lesion）評估；研究也未設計來描述學習曲線。</p>
         <p>還有一個對台灣特別重要的外推限制：IRB 核准的年齡上限為 65 歲，收案的 20 人中有 6 人因超齡被排除。<strong>而高齡者正是肺癌篩檢族群的主力</strong>，因此這批結果不能直接外推到他們身上。</p>
       </div>
@@ -764,13 +804,13 @@ td strong{font-weight:600}
 
             <div class="lad-row"><div class="lad-name">VR 能力評估工具（VATSAT）</div><div class="lad-track t3" role="img" aria-label="證據等級 3，隨機對照試驗"><span class="on"></span><span class="on"></span><span class="on"></span><span></span></div><div class="lad-note">信效度驗證研究，客觀評分</div></div>
 
-            <div class="lad-row"><div class="lad-name">開源 VR 平台訓練成效</div><div class="lad-track t2" role="img" aria-label="證據等級 2，前瞻或多中心世代研究"><span class="on"></span><span class="on"></span><span></span><span></span></div><div class="lad-note">前瞻前後測 13 人（三總），自評結果</div></div>
+            <div class="lad-row"><div class="lad-name"><span class="tsgh-dot">◆</span>開源 VR 平台訓練成效</div><div class="lad-track t2" role="img" aria-label="證據等級 2，前瞻或多中心世代研究"><span class="on"></span><span class="on"></span><span></span><span></span></div><div class="lad-note">前瞻前後測 13 人（三總），自評結果</div></div>
 
             <div class="lad-row"><div class="lad-name">3D 列印輔助規劃與教學</div><div class="lad-track t3" role="img" aria-label="證據等級 3，隨機對照試驗"><span class="on"></span><span class="on"></span><span class="on"></span><span></span></div><div class="lad-note">小型 RCT 與準隨機試驗</div></div>
 
             <div class="lad-row"><div class="lad-name">AI 肺結節偵測與風險預測</div><div class="lad-track t2" role="img" aria-label="證據等級 2，前瞻或多中心世代研究"><span class="on"></span><span class="on"></span><span></span><span></span></div><div class="lad-note">大型外部驗證，無臨床結果 RCT</div></div>
 
-            <div class="lad-row"><div class="lad-name">AI 擴增螢光透視術中定位</div><div class="lad-track t2" role="img" aria-label="證據等級 2，前瞻或多中心世代研究"><span class="on"></span><span class="on"></span><span></span><span></span></div><div class="lad-note">前瞻單臂 14 例（三總），無對照組</div></div>
+            <div class="lad-row"><div class="lad-name"><span class="tsgh-dot">◆</span>AI 擴增螢光透視術中定位</div><div class="lad-track t2" role="img" aria-label="證據等級 2，前瞻或多中心世代研究"><span class="on"></span><span class="on"></span><span></span><span></span></div><div class="lad-note">前瞻單臂 14 例（三總），無對照組</div></div>
 
             <div class="lad-row"><div class="lad-name">術後預測模型與穿戴監測</div><div class="lad-track t2" role="img" aria-label="證據等級 2，前瞻或多中心世代研究"><span class="on"></span><span class="on"></span><span></span><span></span></div><div class="lad-note">多中心世代研究</div></div>
 
@@ -785,7 +825,7 @@ td strong{font-weight:600}
             <div class="lad-scale"><div></div><div><span>案例系列</span><span>統合分析</span></div><div></div></div>
           </div>
         </div>
-        <figcaption><b>圖二．</b>四級證據階梯：1＝案例系列或回溯性研究，2＝前瞻性或多中心世代研究，3＝隨機對照試驗，4＝統合分析。媒體與廠商關注度大致與此圖倒序——曝光最高的三項落在最底部。</figcaption>
+        <figcaption><b>圖二．</b>四級證據階梯：1＝案例系列或回溯性研究，2＝前瞻性或多中心世代研究，3＝隨機對照試驗，4＝統合分析。媒體與廠商關注度大致與此圖倒序——曝光最高的三項落在最底部。標有 <span style="color:var(--tsgh)">◆</span> 者為三軍總醫院團隊的研究。</figcaption>
       </figure>
     </section>
 
@@ -859,15 +899,15 @@ td strong{font-weight:600}
       <h3>導航設備完全仰賴進口</h3>
       <p>台灣本土手術導航新創集中在<strong>神經外科</strong>——鈦隼生物科技的 NaoTrac 已於 2025 年取得美國 FDA 510(k)，並持有 TFDA 與歐盟 CE 認證（<a href="https://www.sgs.com.tw/news-media-resources-content/page?id=1783">相關報導</a>）。胸腔外科導航的<strong>設備端</strong>則仍仰賴 Medtronic superDimension、Intuitive Ion、Body Vision LungVision 等進口平台，本土供應鏈屬空白。<span class="ev ev-d">產業動態</span></p>
 
-      <div class="callout">
+      <div class="callout tsgh-box">
         <span class="tag">但臨床證據這一端不是空白</span>
         <p>設備仰賴進口，不等於台灣沒有能力產出這個領域的臨床證據。以三軍總醫院胸腔外科為例，該團隊在這條技術鏈上已累積橫跨十餘年的成果，而且三項研究恰好對應本文第 01 節指出的三個不同缺口。</p>
         <p>這件事的策略意義值得點出：<strong>證據生產與設備製造是兩條可以分開走的路。</strong>台灣醫學中心即使短期內做不出自己的導航硬體，仍可以在臨床驗證、實作研究（implementation research）與亞洲族群外部驗證上取得話語權——而這恰好是本文第 08 節指出的、目前全球最稀缺的東西。</p>
       </div>
 
-      <div class="table-wrap">
+      <div class="table-wrap tsgh-table">
         <table>
-          <caption>單一機構的技術鏈：三軍總醫院胸腔外科</caption>
+          <caption>單一機構的技術鏈：三軍總醫院胸腔外科　<span class="tsgh">三總團隊</span></caption>
           <thead>
             <tr><th scope="col">階段</th><th scope="col">研究</th><th scope="col">設計與規模</th><th scope="col">對應的臨床缺口</th></tr>
           </thead>
@@ -957,9 +997,9 @@ td strong{font-weight:600}
     <div class="endnote">
       <h2>資料來源與使用說明</h2>
       <p>本文由四組平行文獻檢索彙整而成，涵蓋 PubMed／PMC、NEJM、JCO、CHEST、JTO、EJCTS、JTCVS Techniques、JAMA Surgery、JMIR Formative Research、Science Robotics、npj Digital Medicine、ClinicalTrials.gov、FDA 與 TFDA 公開資料，以及廠商與機構新聞稿。內文連結指向可公開取得的來源頁面。</p>
-      <p>第 02、05、09 節引用之三軍總醫院導航研究全文為開放取用（CC BY 4.0）：Teng H, Huang HK, Chen YS, Lin CJ, Tsai YH, Huang TW, Lin KH. Real-Time AI-Augmented Fluoroscopic Navigation for Intraoperative Pulmonary Nodule Localization: Prospective Observational Pilot Study. <em>JMIR Form Res</em>. 2026;10:e94084. doi:10.2196/94084（2026 年 8 月 31 日刊出；ClinicalTrials.gov NCT07682012）。</p>
-      <p>第 03、09 節引用之術前 3D 模擬研究：Lin KH, Huang YJ, Lee SC, Huang HK, Chen YY, Chang H, Wu TH, Sung BY, Huang TW. Benefit of Three-dimensional Image Simulation in Surgical Resection of Early-stage Lung Cancer. <em>Ann Thorac Surg</em>. 2022;114(4):1029-1034. doi:10.1016/j.athoracsur.2021.06.091（TSGHIRB A202005013）。</p>
-      <p>第 03、09 節引用之 Godot 開源虛擬手術訓練平台工作坊資料，來自三軍總醫院研究計畫（IRB A202605008、國科會 113WFE0110233，主持人黃敍愷），為<strong>尚未正式發表之內部研究資料</strong>，本文依團隊提供之結果報告撰寫。第二場工作坊與納入客觀能力評估的後續分析仍在進行，數據於正式發表前應以團隊最終版本為準。</p>
+      <p><span class="tsgh">三總團隊</span>　第 02、05、09 節引用之導航研究全文為開放取用（CC BY 4.0）：Teng H, Huang HK, Chen YS, Lin CJ, Tsai YH, Huang TW, Lin KH. Real-Time AI-Augmented Fluoroscopic Navigation for Intraoperative Pulmonary Nodule Localization: Prospective Observational Pilot Study. <em>JMIR Form Res</em>. 2026;10:e94084. doi:10.2196/94084（2026 年 8 月 31 日刊出；ClinicalTrials.gov NCT07682012）。</p>
+      <p><span class="tsgh">三總團隊</span>　第 03、09 節引用之術前 3D 模擬研究：Lin KH, Huang YJ, Lee SC, Huang HK, Chen YY, Chang H, Wu TH, Sung BY, Huang TW. Benefit of Three-dimensional Image Simulation in Surgical Resection of Early-stage Lung Cancer. <em>Ann Thorac Surg</em>. 2022;114(4):1029-1034. doi:10.1016/j.athoracsur.2021.06.091（TSGHIRB A202005013）。</p>
+      <p><span class="tsgh">三總團隊</span>　第 03、09 節引用之 Godot 開源虛擬手術訓練平台工作坊資料，來自三軍總醫院研究計畫（IRB A202605008、國科會 113WFE0110233，主持人黃敍愷），為<strong>尚未正式發表之內部研究資料</strong>，本文依團隊提供之結果報告撰寫。第二場工作坊與納入客觀能力評估的後續分析仍在進行，數據於正式發表前應以團隊最終版本為準。</p>
       <p>引用前請注意以下幾點：</p>
       <ul>
         <li>標示<span class="ev ev-d">產業動態</span>的內容來自新聞稿、預印本或媒體報導，可信度低於同儕審查文獻，寫入正式文件前應另行查證原始資料。</li>
